@@ -75,9 +75,7 @@ public class AvanceRapido {
     }
     
     public void izquierdaEscogida(){
-        for(int i = 0;i<posiblesIzquierdas.size();i++){
-            
-        }
+       
     }
 
     public ArrayList<Pieza> getPosiblesIzquierdas() {
