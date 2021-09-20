@@ -1,0 +1,11 @@
+1. Escoger una posible esquina del lado izquierda o pared izquierda.
+2. De la pieza que se escogio, seguir hacia a la derecha hasta terminar la fila
+3.Pasar a la fila de abajo y armar la fila
+4.En caso de no haber match, nos devolvemos a la primera pieza que se coloco, y vemos si hay match hacia arriba y armamos dicha fila de arriba, y seguimos.
+5. En caso de que la pieza no tenga match hacia arriba, significa que esta mal armado y escogemos otra pieza izquierda y reiniciamos el ciclo.
+
+Que necesitamos?
+
+-Hacer posibles esquinas o paredes
+
+-Si tiene un 0 como match, en norte y oeste, significa que esquina sup izquierda(3x). Si tiene un 0 en el oeste,tiene 2x probabilidad de ser pared izquierda, 
