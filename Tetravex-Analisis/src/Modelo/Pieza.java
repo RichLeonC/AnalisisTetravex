@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,18 +15,21 @@ import java.util.HashMap;
 public class Pieza {
    private Integer []posiciones = new Integer[4];
    private int numPieza;
-   private HashMap<Integer, Integer> dictMatches;
+   private HashMap<Integer, ArrayList<Integer>> dictMatches;
    private int probabilidad;
    private boolean usada;
+   private boolean usadaInicial;
+   
 
     public Pieza() {
         dictMatches = new HashMap();
-        dictMatches.put(0, 0); // (0,1), (0,2), (0,3)
-        dictMatches.put(1, 0);
-        dictMatches.put(2, 0);
-        dictMatches.put(3, 0);
+        dictMatches.put(0, new ArrayList()); // (0,1), (0,2), (0,3)
+        dictMatches.put(1, new ArrayList());
+        dictMatches.put(2, new ArrayList());
+        dictMatches.put(3, new ArrayList());
         probabilidad = 0;
         usada = false;
+        usadaInicial = false;
         
     }
 
@@ -59,11 +63,11 @@ public class Pieza {
         this.numPieza = numPieza;
     }
 
-    public HashMap<Integer, Integer> getDict() {
+    public HashMap<Integer,ArrayList<Integer>> getDict() {
         return dictMatches;
     }
 
-    public void setDict(HashMap<Integer, Integer> dict) {
+    public void setDict(HashMap<Integer, ArrayList<Integer>> dict) {
         this.dictMatches = dict;
     }
     
@@ -110,6 +114,14 @@ public class Pieza {
 
     public void setUsada(boolean usada) {
         this.usada = usada;
+    }
+
+    public boolean isUsadaInicial() {
+        return usadaInicial;
+    }
+
+    public void setUsadaInicial(boolean usadaInicial) {
+        this.usadaInicial = usadaInicial;
     }
     
     

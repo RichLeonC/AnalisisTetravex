@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+
 import java.util.ArrayList;
 
 /**
@@ -18,40 +19,44 @@ public class AvanceRapido {
     private final int oeste = 3;
     private ArrayList<Pieza>piezas;
     private ArrayList<Pieza>posiblesIzquierdas;
+    ArrayList<Pieza> piezasSolucion;
     private Pieza piezaInicial;
 
     public AvanceRapido(ArrayList<Pieza> piezas) {
         this.piezas = piezas;
         posiblesIzquierdas = new ArrayList();
+        piezasSolucion = new ArrayList();
+    }
+    
+    private boolean isPrimera(int numero,int posicion){ //Verifica si la pieza pasada era multiplo
+        return (posicion-1)%numero == 0;
     }
     
     public void matchesPiezas(){
        // System.out.println("xd");
+        
         for(int k = 0;k<piezas.size();k++){
             Pieza piezaActual = piezas.get(k);
             for(int i = 1;i<piezas.size();i++){
                Pieza piezasNext = piezas.get(i);
-              //  System.out.println("Actual Norte = "+piezaActual.getNorte()+" == next ="+piezasNext.getNorte());
+             
                if(piezaActual.getNorte() == piezasNext.getNorte()){
-                  // System.out.println("AA");
-                   piezaActual.getDict().replace(norte,piezaActual.getDict().get(norte)+1);
+                   piezaActual.getDict().get(norte).add(piezasNext.getNumPieza());
                    
                }
                if(piezaActual.getEste()== piezasNext.getEste()){
-                  // System.out.println("BB");
-                   piezaActual.getDict().replace(este,piezaActual.getDict().get(este)+1);
+                
+                   piezaActual.getDict().get(este).add(piezasNext.getNumPieza());
                }
                if(piezaActual.getSur()== piezasNext.getSur()){
-                  // System.out.println("CC");
-                   piezaActual.getDict().replace(sur,piezaActual.getDict().get(sur)+1);
+                 
+                  piezaActual.getDict().get(sur).add(piezasNext.getNumPieza());
                }
                
                if(piezaActual.getOeste()== piezasNext.getOeste()){
-                 //  System.out.println("DD");
-                   piezaActual.getDict().replace(oeste,piezaActual.getDict().get(oeste)+1);
+                
+                   piezaActual.getDict().get(oeste).add(piezasNext.getNumPieza());
                }
-               
-
             }
             
             if(piezaActual.getOeste()  == 0 && piezaActual.getNorte() == 0){
@@ -74,10 +79,31 @@ public class AvanceRapido {
         
     }
     
-    public void izquierdaEscogida(){
+    public void piezaInicial(){
+        for(int i = 0;i<posiblesIzquierdas.size();i++){
+            if(!posiblesIzquierdas.get(i).isUsada()){
+                piezaInicial = posiblesIzquierdas.get(i);
+                 piezaInicial.setUsadaInicial(true);
+            }
+        }
+        piezasSolucion.add(piezaInicial);
+        
        
+      
     }
-
+    
+    public void armar(int limite){
+        Pieza pActual = piezaInicial;
+        for(int i =0;i<piezas.size();i++){
+            Pieza pSiguiente = piezas.get(i);
+             if(!isPrimera(limite, i)){
+                 if(pActual.getEste() == pSiguiente.getEste()){
+                     
+                 }
+             }
+        }
+    }
+    
     public ArrayList<Pieza> getPosiblesIzquierdas() {
         return posiblesIzquierdas;
     }

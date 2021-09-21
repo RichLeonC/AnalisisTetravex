@@ -113,7 +113,7 @@ public class Main {
     public static void principal(){
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
-        ArrayList<Pieza> piezasSolucion = new ArrayList();
+        
         
         llenarPuzzle(15, piezasArmadas, 3*3);
         desordenar(piezasDesordenadas, piezasArmadas);
@@ -133,7 +133,7 @@ public class Main {
 
     public static void main(String[] args) {
         principal();
-        System.out.println("hello este es el cambio");
+       
     }
     
 }
