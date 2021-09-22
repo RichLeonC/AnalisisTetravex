@@ -31,9 +31,25 @@ public class AvanceRapido {
     private boolean isPrimera(int numero,int posicion){ //Verifica si la pieza pasada era multiplo
         return (posicion-1)%numero == 0;
     }
+    //Esta funcion decide si es posible pared izquierda y le asigna una probabilidad de serlo.
+    private void decidirProbabilidad(Pieza piezaActual, ArrayList<Pieza> posiblesIzquierdas){
+        if(piezaActual.getDict().get(oeste).isEmpty() && piezaActual.getDict().get(norte).isEmpty() &&
+          !piezaActual.getDict().get(este).isEmpty()){       
+          piezaActual.setProbabilidad(3);         
+          posiblesIzquierdas.add(piezaActual);
+         }
+        else if(piezaActual.getDict().get(oeste).isEmpty() && !piezaActual.getDict().get(este).isEmpty()){
+           
+         piezaActual.setProbabilidad(2);
+         posiblesIzquierdas.add(piezaActual);
+        }
+        else if(piezaActual.getDict().get(oeste).size()%2==0 && !piezaActual.getDict().get(este).isEmpty()){
+         piezaActual.setProbabilidad(1);
+         posiblesIzquierdas.add(piezaActual);
+        } 
+    }
     
     private void matchesPiezas(){
-       // System.out.println("xd");
         
         for(int k = 0;k<piezas.size();k++){
             Pieza piezaActual = piezas.get(k);
@@ -52,31 +68,14 @@ public class AvanceRapido {
 
                        piezaActual.getDict().get(sur).add(piezasNext);
                     }
-
                     if(piezaActual.getOeste()== piezasNext.getEste()){
 
                         piezaActual.getDict().get(oeste).add(piezasNext);
                     }
                  }
             }
-            //System.out.println("Oeste: "+piezaActual.getOeste()+" Norte: "+piezaActual.getNorte());
-            if(piezaActual.getDict().get(oeste).isEmpty() && piezaActual.getDict().get(norte).isEmpty() &&
-                     !piezaActual.getDict().get(este).isEmpty()){
-           
-                  piezaActual.setProbabilidad(3);
-                   
-                   posiblesIzquierdas.add(piezaActual);
-               }
-            else if(piezaActual.getDict().get(oeste).isEmpty() && !piezaActual.getDict().get(este).isEmpty()){
-           
-                   piezaActual.setProbabilidad(2);
-                   posiblesIzquierdas.add(piezaActual);
-               }
-             else if(piezaActual.getDict().get(oeste).size()%2==0 && !piezaActual.getDict().get(este).isEmpty()){
+            decidirProbabilidad(piezaActual, posiblesIzquierdas);
              
-                   piezaActual.setProbabilidad(1);
-                   posiblesIzquierdas.add(piezaActual);
-               }  
         }
         
     }
