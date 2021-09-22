@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class Pieza {
    private Integer []posiciones = new Integer[4];
    private int numPieza;
-   private HashMap<Integer, ArrayList<Integer>> dictMatches;
+   private HashMap<Integer, ArrayList<Pieza>> dictMatches;
    private int probabilidad;
    private boolean usada;
    private boolean usadaInicial;
@@ -63,11 +63,11 @@ public class Pieza {
         this.numPieza = numPieza;
     }
 
-    public HashMap<Integer,ArrayList<Integer>> getDict() {
+    public HashMap<Integer,ArrayList<Pieza>> getDict() {
         return dictMatches;
     }
 
-    public void setDict(HashMap<Integer, ArrayList<Integer>> dict) {
+    public void setDict(HashMap<Integer, ArrayList<Pieza>> dict) {
         this.dictMatches = dict;
     }
     

@@ -28,7 +28,7 @@ public class Main {
         Pieza piezaActual;
         for(int i = 1;i<=orden;i++){ //Recorre la cantidad total de las piezas
            piezaActual = new Pieza();
-          // piezaActual.setNumPieza(i);
+           piezaActual.setNumPieza(i);
             for(int j=0;j<4;j++){ //Recorre cada posicion de una pieza
                 if(piezasArmadas.isEmpty()){ //Si no hay piezas,agrega todas sus posiciones de manera aleatoria
                    numero = aleatorio.nextInt(limite+1); 
@@ -117,22 +117,26 @@ public class Main {
         
         llenarPuzzle(15, piezasArmadas, 3*3);
         desordenar(piezasDesordenadas, piezasArmadas);
-        AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
-        rapido.matchesPiezas();
-        System.out.println("Piezas Desordenas: \n");
-        for(int i = 0;i<piezasDesordenadas.size();i++){
-            System.out.println(piezasDesordenadas.get(i));
-        }
         
-        System.out.println("Posibles izquierdas");
-        System.out.println("Size: "+rapido.getPosiblesIzquierdas().size() );
+        
+        
+        System.out.println("Piezas Desordenas: \n");
+      //  for(int i = 0;i<piezasDesordenadas.size();i++){
+        //    System.out.println(piezasDesordenadas.get(i));
+      //  }
+        
+      //  System.out.println("Posibles izquierdas");
+       // System.out.println("Size: "+rapido.getPosiblesIzquierdas().size() );
        
-         System.out.println(rapido.getPosiblesIzquierdas());
-         System.out.println("Pieza inicial: "+rapido.getPiezaInicial());
+         //System.out.println(rapido.getPosiblesIzquierdas());
+       //  System.out.println("Pieza inicial: "+rapido.getPiezaInicial());
+        AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
+        rapido.armar(100);
     }
 
     public static void main(String[] args) {
         principal();
+        
        
     }
     
