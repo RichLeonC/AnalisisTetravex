@@ -125,7 +125,7 @@ public class AvanceRapido {
   
         int cont = 0;
 
-        for(int i =3;i<piezas.size()+1;i++){ //Recorre todas las piezas
+        for(int i =3;i<piezas.size()+3;i++){ //Recorre todas las piezas
             pActual = pSiguiente;  //Asigna a la actual la siguiente
             System.out.println("i: "+i+" es primera: "+isPrimera(limite, i));
              if(!isPrimera(limite, i)&&i<=limite){ //Pregunta si es primera pieza de fila
@@ -153,7 +153,7 @@ public class AvanceRapido {
                     ArrayList<Pieza> sures  = pActual.getDict().get(sur); //Obtenemos todos los matches en el sur de la pieza de arriba
              
                  while(cont<=sures.size()&&sures.get(cont).isUsada()){ //Preguntamos si existe algun match usado
-                     System.out.println("cont: "+cont);
+                     //System.out.println("cont: "+cont);
                      cont++;
                  }
                  pSiguiente = pActual.getDict().get(sur).get(cont);
@@ -163,12 +163,10 @@ public class AvanceRapido {
                  
                  }
                  else{
-                     System.out.println("Llego aqui");
-                     int numeroEste = pActual.getEste();
-                     System.out.println("Numero: "+(i-limite-1));
-                     pActual = piezasSolucion.get(i-limite-1);
                      
-                     System.out.println("PActual: "+pActual);
+                     int numeroEste = pActual.getEste(); 
+                     pActual = piezasSolucion.get(i-limite-1);
+                   
                      ArrayList<Pieza> sures  = pActual.getDict().get(sur);
                      for (Pieza sure : sures) {
                          if(sure.getOeste() == numeroEste && !sure.isUsada()){
@@ -176,6 +174,9 @@ public class AvanceRapido {
                              System.out.println("Pieza Siguiente: "+pSiguiente);
                              sure.setUsada(true);
                              piezasSolucion.add(pSiguiente);
+                         }
+                         else{
+                             
                          }
                      }
                      cont = 0;

@@ -5,10 +5,14 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 
 public class FuerzaBruta {
-
+    
+    
     public FuerzaBruta() {
+       
     }
     
     
