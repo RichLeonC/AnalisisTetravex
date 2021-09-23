@@ -103,18 +103,15 @@ public class Main {
             piezasA.get(numero).setNumPieza(numPieza);
             piezasD.add(piezasA.get(numero));
             piezasA.remove(piezasA.get(numero));
-            
             numPieza++;
-            
-        }
+       }
     
     }
     
     public static void principal(){
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
-        
-        
+       
         llenarPuzzle(15, piezasArmadas, 3*3);
         desordenar(piezasDesordenadas, piezasArmadas);
         
@@ -131,7 +128,7 @@ public class Main {
          //System.out.println(rapido.getPosiblesIzquierdas());
        //  System.out.println("Pieza inicial: "+rapido.getPiezaInicial());
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
-        rapido.armar(100);
+        rapido.armar(3);
     }
 
     public static void main(String[] args) {
