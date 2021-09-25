@@ -209,10 +209,8 @@ public class AvanceRapido {
         pActual.setUsada(false);
         System.out.println("Pieza Eliminada: "+pActual);
         piezasSolucion.remove(indice-2);
-      //  if(isPrimera(limite, indice-2)){
-            
-      //  }
         
+      
         System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
        return piezasSolucion.get(indice-3);
         
