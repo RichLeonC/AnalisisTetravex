@@ -24,6 +24,7 @@ public class AvanceRapido {
 
     public AvanceRapido(ArrayList<Pieza> piezas) {
         this.piezas = piezas;
+        
         posiblesIzquierdas = new ArrayList();
         piezasSolucion = new ArrayList();
     }
@@ -85,24 +86,25 @@ public class AvanceRapido {
         for(int i = 0;i<posiblesIzquierdas.size();i++){
             Pieza pieza = posiblesIzquierdas.get(i);
             if(!pieza.isUsada()&&pieza.getProbabilidad()==3){
-                piezaInicial = pieza;
-                // System.out.println("Proba: "+pieza.getProbabilidad());
+                piezaInicial = pieza;    
+                piezaInicial.setUsadaInicial(true);
+                piezaInicial.setUsada(true);
                  break;
             }
             else if(!pieza.isUsada()&&pieza.getProbabilidad()==2) {
                 piezaInicial = pieza;
                 mejor = 2;
-              //  System.out.println("Proba: "+pieza.getProbabilidad());
+                piezaInicial.setUsadaInicial(true);
+                piezaInicial.setUsada(true);
             }
      
             else if(!pieza.isUsada() && pieza.getProbabilidad()>=mejor){
                 piezaInicial = pieza;
-              //  System.out.println("Proba: "+pieza.getProbabilidad());
+                piezaInicial.setUsadaInicial(true);
+                piezaInicial.setUsada(true);
             }
-
         }
-        piezaInicial.setUsadaInicial(true);
-        piezaInicial.setUsada(true);
+        
         System.out.println("Size:"+posiblesIzquierdas.size());
         System.out.println("Posibles Izq: "+posiblesIzquierdas);
         System.out.println("Pieza Inicial: "+piezaInicial);
@@ -116,78 +118,149 @@ public class AvanceRapido {
     public Pieza primeraPieza(){
        
         System.out.println("Size array Este: "+piezaInicial.getDict().get(este).size());
-        System.out.println("Dict: "+piezaInicial +" son: "+piezaInicial.getDict().get(este).get(0));
+        System.out.println(piezaInicial);
         Pieza pSiguiente = piezaInicial.getDict().get(este).get(0);
+        System.out.println(pSiguiente);
         pSiguiente.setUsada(true);
         piezasSolucion.add(pSiguiente);
         return pSiguiente;
     }
     
-    public void colocaPiezas(int ubicacion, Pieza pActual,Pieza pSiguiente,int cont){
-        
-        ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion); //Tiene todos posibles matches de actual en el este
-         // System.out.println("estesSize:"+estes.size());
-         while(cont<=ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
-           System.out.println("cont: "+cont);
+    public void colocaPiezas(int ubicacion, Pieza pActual,Pieza pSiguiente){
+        int cont = 0;
+        ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion); //Tiene todos posibles matches de actual en el este  
+        System.out.println("cont"+cont+"&& "+ubicaciones.get(cont)+" "+ubicaciones.get(cont).isUsada());
+        while(cont<=ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
             cont++;                                                                      //Incrementa hasta que encuentre uno no usado
+             System.out.println("cont: "+cont);
           }
           if(cont<=ubicaciones.size()){ //Si existe algun match no usado
-            pSiguiente = pActual.getDict().get(este).get(cont);
-            System.out.println("Pieza Siguiente: "+pSiguiente);
+            pSiguiente = ubicaciones.get(cont);
+            System.out.println("Pieza SiguienteX: "+pSiguiente);
             pSiguiente.setUsada(true);
              piezasSolucion.add(pSiguiente);
            }
-          cont = 0;
+        
     }
     
-    public void armar(int limite){
+    public boolean existePiezaCentral(Pieza pActual,Pieza pSiguiente, int numeroEste){
+        ArrayList<Pieza> sures  = pActual.getDict().get(sur);
+        for (Pieza sure : sures) {
+            if(sure.getOeste() == numeroEste && !sure.isUsada()){
+                 pSiguiente = sure;
+                 System.out.println("Pieza Siguiente: "+pSiguiente);
+                 sure.setUsada(true);
+                 piezasSolucion.add(pSiguiente);
+                 return true;
+             }
+             
+          }
+        return false;
+    }
+    
+    public Pieza setPieza(Pieza pSiguiente){
+        Pieza pActual = new Pieza();
+        pActual.setPosiciones(pSiguiente.getPosiciones());
+        pActual.setDict(pSiguiente.getDict());
+        pActual.setProbabilidad(pSiguiente.getProbabilidad());
+        pActual.setUsada(pSiguiente.isUsada());
+        pActual.setUsadaInicial(pSiguiente.isUsadaInicial());
+        pActual.setNumPieza(pSiguiente.getNumPieza());
+        return pActual;
+    }
+    
+    public void armar(int limite, ArrayList<Pieza> armado){
         
         matchesPiezas();
-        piezaInicial();
+        //piezaInicial();
+        piezaInicial = armado.get(0);
+        piezaInicial.setUsadaInicial(true);
+        piezaInicial.setUsada(true);
+        piezasSolucion.add(piezaInicial);
         Pieza pActual;
         Pieza pSiguiente = primeraPieza();
-
+       
+        
         int cont = 0;
-
-        for(int i =3;i<piezas.size()+3;i++){ //Recorre todas las piezas
-            pActual = pSiguiente;  //Asigna a la actual la siguiente
+        int i = 3;
+        //for(int i =3;i<(piezas.size()+3);i++){ //Recorre todas las piezas
+        while(piezasSolucion.size()<limite*limite){
+            
+            
+            pActual = setPieza(pSiguiente);  //Asigna a la actual la siguiente
+            //System.out.println(pActual+"Usada: "+pActual.isUsada());
             System.out.println("i: "+i+" es primera: "+isPrimera(limite, i));
-             if(!isPrimera(limite, i)&&i<=limite){ //Pregunta si es primera pieza de la primera fila
-                   colocaPiezas(este, pActual, pSiguiente, cont);
+             if(!isPrimera(limite, i)&&i<=limite){ //Pregunta si no es primera pieza de la primera fila
+                 System.out.println("x");
+               colocaPiezas(este, pActual, pSiguiente);
              }
              else{ //Es segunda fila o siguiente
-                // System.out.println("I:"¡);
-                 if(isPrimera(limite, i)){
-                   pActual = piezasSolucion.get(i-limite-1); //Obtenemos como actual la pieza de arriba de la primera pieza de fila
-                   colocaPiezas(sur, pActual, pSiguiente, cont);
+               
+                 if(isPrimera(limite, i)){ //Si es primera pieza de fila
+                   System.out.println("y");
+                   pActual = setPieza(piezasSolucion.get(i-limite-1)); //Obtenemos como actual la pieza de arriba de la primera pieza de fila
+                     System.out.println("ACTUAL: "+pActual);
+                   colocaPiezas(sur, pActual, pSiguiente);
                  }
-                 else{
+                 else{ //Significa que es la segunda pieza de fila o posteriores
                      
                      int numeroEste = pActual.getEste(); 
                      pActual = piezasSolucion.get(i-limite-1);
-                   
-                     ArrayList<Pieza> sures  = pActual.getDict().get(sur);
-                     for (Pieza sure : sures) {
-                         if(sure.getOeste() == numeroEste && !sure.isUsada()){
-                             pSiguiente = sure;
-                             System.out.println("Pieza Siguiente: "+pSiguiente);
-                             sure.setUsada(true);
-                             piezasSolucion.add(pSiguiente);
-                         }
-                         else{
-                             
-                         }
-                     }
+                     existePiezaCentral(pActual, pSiguiente,numeroEste); //Busca pieza que encaje con la de arriba e izquierda
                      cont = 0;
                     
                  }
       
              }
-             
+             i++;
         }
         System.out.println(piezasSolucion);
     }
     
+    public void armarCola(int limite, ArrayList<Pieza> armado){
+        matchesPiezas();
+        //piezaInicial();
+        piezaInicial = armado.get(0);
+        piezaInicial.setUsadaInicial(true);
+        piezaInicial.setUsada(true);
+        piezasSolucion.add(piezaInicial);
+        Pieza pActual = piezaInicial;
+        //Pieza pSiguiente = primeraPieza();
+        armarAux(limite,pActual,null,1);
+    }
+    public Pieza buscaMatch(Pieza pActual,int ubicacion){
+        int cont = 0;
+        ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion);
+        if(!ubicaciones.isEmpty()) {
+            while(cont<=ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
+                cont++;                                                                      //Incrementa hasta que encuentre uno no usado
+            }
+            if(cont>ubicaciones.size()) return null;
+            
+        }
+        return null;
+    }
+    
+    public boolean tieneSolucion(){
+        for(Pieza p : piezas){
+            if(!p.isUsada()) return true;
+        }
+        return false;
+    }
+    public int armarAux(int limite, Pieza pActual,Pieza pSiguiente,int indice){
+        if(piezasSolucion.size() == limite*limite) return 1;
+        
+        else if(tieneSolucion()){
+            if(indice<=limite){ //Estamos en primera fila
+            }
+        }
+        else{
+            
+        }
+       
+        return 0;
+    }
+  
     public ArrayList<Pieza> getPosiblesIzquierdas() {
         return posiblesIzquierdas;
     }
