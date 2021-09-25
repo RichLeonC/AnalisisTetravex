@@ -6,6 +6,7 @@
 package Vista;
 
 import Modelo.AvanceRapido;
+import Modelo.FuerzaBruta;
 import Modelo.Pieza;
 import java.util.ArrayList;
 import java.util.Random;
@@ -111,6 +112,7 @@ public class Main {
     public static void principal(){
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
+        ArrayList<Pieza> piezasArmadasDos = new ArrayList();
         ArrayList<Pieza> temporalArmado;
        
         llenarPuzzle(15, piezasArmadas, 3*3);
@@ -133,6 +135,9 @@ public class Main {
        
         rapido.armarCola(3, temporalArmado);
         //rapido.matchesPiezas();
+        piezasArmadasDos = (ArrayList<Pieza>) piezasArmadas.clone();
+        System.out.println("Hola -> " + piezasArmadasDos);
+        FuerzaBruta.comparar(piezasDesordenadas, 9);
     }
 
     public static void main(String[] args) {
