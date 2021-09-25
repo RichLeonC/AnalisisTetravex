@@ -130,8 +130,9 @@ public class Main {
          //System.out.println(rapido.getPosiblesIzquierdas());
        //  System.out.println("Pieza inicial: "+rapido.getPiezaInicial());
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
-        //rapido.armar(3,temporalArmado);
+       
         rapido.armarCola(3, temporalArmado);
+        //rapido.matchesPiezas();
     }
 
     public static void main(String[] args) {

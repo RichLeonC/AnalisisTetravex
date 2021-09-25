@@ -50,19 +50,21 @@ public class AvanceRapido {
         } 
     }
     
-    private void matchesPiezas(){
+    public void matchesPiezas(){
         
         for(int k = 0;k<piezas.size();k++){
             Pieza piezaActual = piezas.get(k);
-            for(int i = 1;i<piezas.size();i++){
+            for(int i = 0;i<piezas.size();i++){
                Pieza piezasNext = piezas.get(i);
                if(!piezaActual.equals(piezasNext)){
+                   
                     if(piezaActual.getNorte() == piezasNext.getSur()){
                         piezaActual.getDict().get(norte).add(piezasNext);
 
                     }
+                    //if(piezaActual.getNumPieza() == 2) System.out.println("ActEste: "+piezaActual.getEste()+" == "+piezasNext.getOeste());
                     if(piezaActual.getEste()== piezasNext.getOeste()){
-
+                      //  if(piezaActual.getNumPieza() == 2) System.out.println("Entre");
                         piezaActual.getDict().get(este).add(piezasNext);
                     }
                     if(piezaActual.getSur()== piezasNext.getNorte()){
@@ -74,10 +76,13 @@ public class AvanceRapido {
                         piezaActual.getDict().get(oeste).add(piezasNext);
                     }
                  }
+                
             }
+            //System.out.println(piezaActual+" estes: "+piezaActual.getDict().get(este));
             decidirProbabilidad(piezaActual, posiblesIzquierdas);
              
         }
+       // System.out.println("\n\n");
         
     }
     
@@ -126,37 +131,9 @@ public class AvanceRapido {
         return pSiguiente;
     }
     
-    public void colocaPiezas(int ubicacion, Pieza pActual,Pieza pSiguiente){
-        int cont = 0;
-        ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion); //Tiene todos posibles matches de actual en el este  
-        System.out.println("cont"+cont+"&& "+ubicaciones.get(cont)+" "+ubicaciones.get(cont).isUsada());
-        while(cont<=ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
-            cont++;                                                                      //Incrementa hasta que encuentre uno no usado
-             System.out.println("cont: "+cont);
-          }
-          if(cont<=ubicaciones.size()){ //Si existe algun match no usado
-            pSiguiente = ubicaciones.get(cont);
-            System.out.println("Pieza SiguienteX: "+pSiguiente);
-            pSiguiente.setUsada(true);
-             piezasSolucion.add(pSiguiente);
-           }
-        
-    }
     
-    public boolean existePiezaCentral(Pieza pActual,Pieza pSiguiente, int numeroEste){
-        ArrayList<Pieza> sures  = pActual.getDict().get(sur);
-        for (Pieza sure : sures) {
-            if(sure.getOeste() == numeroEste && !sure.isUsada()){
-                 pSiguiente = sure;
-                 System.out.println("Pieza Siguiente: "+pSiguiente);
-                 sure.setUsada(true);
-                 piezasSolucion.add(pSiguiente);
-                 return true;
-             }
-             
-          }
-        return false;
-    }
+    
+
     
     public Pieza setPieza(Pieza pSiguiente){
         Pieza pActual = new Pieza();
@@ -168,55 +145,7 @@ public class AvanceRapido {
         pActual.setNumPieza(pSiguiente.getNumPieza());
         return pActual;
     }
-    
-    public void armar(int limite, ArrayList<Pieza> armado){
-        
-        matchesPiezas();
-        //piezaInicial();
-        piezaInicial = armado.get(0);
-        piezaInicial.setUsadaInicial(true);
-        piezaInicial.setUsada(true);
-        piezasSolucion.add(piezaInicial);
-        Pieza pActual;
-        Pieza pSiguiente = primeraPieza();
-       
-        
-        int cont = 0;
-        int i = 3;
-        //for(int i =3;i<(piezas.size()+3);i++){ //Recorre todas las piezas
-        while(piezasSolucion.size()<limite*limite){
-            
-            
-            pActual = setPieza(pSiguiente);  //Asigna a la actual la siguiente
-            //System.out.println(pActual+"Usada: "+pActual.isUsada());
-            System.out.println("i: "+i+" es primera: "+isPrimera(limite, i));
-             if(!isPrimera(limite, i)&&i<=limite){ //Pregunta si no es primera pieza de la primera fila
-                 System.out.println("x");
-               colocaPiezas(este, pActual, pSiguiente);
-             }
-             else{ //Es segunda fila o siguiente
-               
-                 if(isPrimera(limite, i)){ //Si es primera pieza de fila
-                   System.out.println("y");
-                   pActual = setPieza(piezasSolucion.get(i-limite-1)); //Obtenemos como actual la pieza de arriba de la primera pieza de fila
-                     System.out.println("ACTUAL: "+pActual);
-                   colocaPiezas(sur, pActual, pSiguiente);
-                 }
-                 else{ //Significa que es la segunda pieza de fila o posteriores
-                     
-                     int numeroEste = pActual.getEste(); 
-                     pActual = piezasSolucion.get(i-limite-1);
-                     existePiezaCentral(pActual, pSiguiente,numeroEste); //Busca pieza que encaje con la de arriba e izquierda
-                     cont = 0;
-                    
-                 }
-      
-             }
-             i++;
-        }
-        System.out.println(piezasSolucion);
-    }
-    
+
     public void armarCola(int limite, ArrayList<Pieza> armado){
         matchesPiezas();
         //piezaInicial();
@@ -226,15 +155,16 @@ public class AvanceRapido {
         piezasSolucion.clear();
         piezasSolucion.add(piezaInicial);
         Pieza pActual = piezaInicial;
-        System.out.println("indice: "+1);
+        System.out.println("Indice: "+1);
         System.out.println("Pactual: "+pActual);
         armarAux(limite,pActual,null,2);
     }
     public Pieza buscaMatch(Pieza pActual,int ubicacion){
         int cont = 0;
         ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion);
+        System.out.println("ubic size: "+ubicaciones.size());
         if(!ubicaciones.isEmpty()) {
-            //System.out.println("ubic size: "+ubicaciones.size());
+            
             while(cont<ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
                 System.out.println(cont);
                 if(cont>=ubicaciones.size()) break;
@@ -277,7 +207,8 @@ public class AvanceRapido {
     
     public Pieza devolverse(Pieza pActual,int indice){
         pActual = piezasSolucion.get(indice-2);
-       return null;
+        System.out.println("Back: "+pActual);
+       return pActual;
         
     }
     public int armarAux(int limite, Pieza pActual,Pieza pSiguiente,int indice){
@@ -287,13 +218,14 @@ public class AvanceRapido {
         else if(tieneSolucion()){
             if(indice<=limite){ //Estamos en primera fila
                
-              // Pieza pTemporal = setPieza(pActual);
+               Pieza pTemporal = setPieza(pActual);
                pActual =  buscaMatch(pActual, este);
                System.out.println("indice: "+indice);
                System.out.println("Pactual: "+pActual);
                if(pActual!=null) armarAux(limite, pActual, null, indice+1);
                else{
-                //   armarAux(limite,piezasSolucion.get(indice-2),null,indice-1);
+                   System.out.println("Entre");
+                   armarAux(limite,devolverse(pActual, indice),null,indice-1);
                   // pTemporal.setUsada(false);
                }
                
@@ -305,6 +237,7 @@ public class AvanceRapido {
                 System.out.println("indice: "+indice);
                 System.out.println("Pactual: "+pActual);
                  if(pActual!=null) armarAux(limite, pActual, null, indice+1);
+                 else armarAux(limite,devolverse(pActual, indice),null,indice-1);
                  
             }
             else{
@@ -315,11 +248,12 @@ public class AvanceRapido {
                 System.out.println("indice: "+indice);
                 System.out.println("Pactual: "+pActual);
                 if(pActual!=null) armarAux(limite, pActual, null, indice+1);
+                else armarAux(limite,devolverse(pActual, indice),null,indice-1);
                 
             }
         }
         else{
-            
+            armarAux(limite,devolverse(pActual, indice),null,indice-1);
         }
        
         return 0;
