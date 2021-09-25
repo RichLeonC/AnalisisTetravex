@@ -223,21 +223,48 @@ public class AvanceRapido {
         piezaInicial = armado.get(0);
         piezaInicial.setUsadaInicial(true);
         piezaInicial.setUsada(true);
+        piezasSolucion.clear();
         piezasSolucion.add(piezaInicial);
         Pieza pActual = piezaInicial;
-        //Pieza pSiguiente = primeraPieza();
-        armarAux(limite,pActual,null,1);
+        System.out.println("indice: "+1);
+        System.out.println("Pactual: "+pActual);
+        armarAux(limite,pActual,null,2);
     }
     public Pieza buscaMatch(Pieza pActual,int ubicacion){
         int cont = 0;
         ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion);
         if(!ubicaciones.isEmpty()) {
-            while(cont<=ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
-                cont++;                                                                      //Incrementa hasta que encuentre uno no usado
+            //System.out.println("ubic size: "+ubicaciones.size());
+            while(cont<ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
+                System.out.println(cont);
+                if(cont>=ubicaciones.size()) break;
+                else cont++;
+                                                                                    //Incrementa hasta que encuentre uno no usado
             }
-            if(cont>ubicaciones.size()) return null;
+            if(cont>=ubicaciones.size()) return null;
+            Pieza pSiguiente = ubicaciones.get(cont);
+           // System.out.println("Pieza SiguienteX: "+pSiguiente);
+            pSiguiente.setUsada(true); 
+            piezasSolucion.add(pSiguiente);
+            return pSiguiente;
             
         }
+        return null;
+    }
+    
+    public Pieza piezaCentral(Pieza pActual,int numeroEste){
+        
+        ArrayList<Pieza> sures  = pActual.getDict().get(sur);
+        for (Pieza sure : sures) {
+            if(sure.getOeste() == numeroEste && !sure.isUsada()){
+                 Pieza pSiguiente = sure;
+                // System.out.println("Pieza Siguiente: "+pSiguiente);
+                 sure.setUsada(true);
+                 piezasSolucion.add(pSiguiente);
+                 return pSiguiente;
+             }
+             
+          }
         return null;
     }
     
@@ -247,11 +274,48 @@ public class AvanceRapido {
         }
         return false;
     }
+    
+    public Pieza devolverse(Pieza pActual,int indice){
+        pActual = piezasSolucion.get(indice-2);
+       return null;
+        
+    }
     public int armarAux(int limite, Pieza pActual,Pieza pSiguiente,int indice){
+        
         if(piezasSolucion.size() == limite*limite) return 1;
         
         else if(tieneSolucion()){
             if(indice<=limite){ //Estamos en primera fila
+               
+              // Pieza pTemporal = setPieza(pActual);
+               pActual =  buscaMatch(pActual, este);
+               System.out.println("indice: "+indice);
+               System.out.println("Pactual: "+pActual);
+               if(pActual!=null) armarAux(limite, pActual, null, indice+1);
+               else{
+                //   armarAux(limite,piezasSolucion.get(indice-2),null,indice-1);
+                  // pTemporal.setUsada(false);
+               }
+               
+            }
+            else if(isPrimera(limite, indice)){
+           
+                pActual =piezasSolucion.get(indice-limite-1);   
+                pActual=buscaMatch(pActual, sur);
+                System.out.println("indice: "+indice);
+                System.out.println("Pactual: "+pActual);
+                 if(pActual!=null) armarAux(limite, pActual, null, indice+1);
+                 
+            }
+            else{
+               
+                int numeroEste = pActual.getEste(); 
+                pActual = piezasSolucion.get(indice-limite-1);
+                pActual = piezaCentral(pActual, numeroEste);
+                System.out.println("indice: "+indice);
+                System.out.println("Pactual: "+pActual);
+                if(pActual!=null) armarAux(limite, pActual, null, indice+1);
+                
             }
         }
         else{
