@@ -79,6 +79,7 @@ public class AvanceRapido {
                 
             }
             System.out.println(piezaActual+" estes: "+piezaActual.getDict().get(este));
+            System.out.println(piezaActual+" sures: "+piezaActual.getDict().get(sur));
             decidirProbabilidad(piezaActual, posiblesIzquierdas);
              
         }
@@ -163,9 +164,9 @@ public class AvanceRapido {
         ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion);
         //System.out.println("ubic size: "+ubicaciones.size());
         if(!ubicaciones.isEmpty()) {
-            
+            System.out.println("Usado: "+ubicaciones.get(cont).isUsada());
             while(cont<ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
-              
+                if(!piezasSolucion.contains(ubicaciones.get(cont))) ubicaciones.get(cont).setUsada(false);
                 if(cont>=ubicaciones.size()) break;
                 else cont++;                                                                     //Incrementa hasta que encuentre uno no usado
             }
@@ -206,7 +207,7 @@ public class AvanceRapido {
     public Pieza devolverse(Pieza pActual,int indice,int limite){
        // piezasSolucion.remove(indice-2);
         pActual = piezasSolucion.get(indice-2);
-        pActual.setUsada(false);
+        pActual.setUsada(true);
         System.out.println("Pieza Eliminada: "+pActual);
         piezasSolucion.remove(indice-2);
         

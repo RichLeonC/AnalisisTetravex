@@ -135,9 +135,9 @@ public class Main {
        
         rapido.armarCola(3, temporalArmado);
         //rapido.matchesPiezas();
-        piezasArmadasDos = (ArrayList<Pieza>) piezasArmadas.clone();
-        System.out.println("Hola -> " + piezasArmadasDos);
-        FuerzaBruta.comparar(piezasDesordenadas, 9);
+        //piezasArmadasDos = (ArrayList<Pieza>) piezasArmadas.clone();
+       // System.out.println("Hola -> " + piezasArmadasDos);
+        //FuerzaBruta.comparar(piezasDesordenadas, 9);
     }
 
     public static void main(String[] args) {
