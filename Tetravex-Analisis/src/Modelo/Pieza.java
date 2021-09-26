@@ -19,6 +19,7 @@ public class Pieza {
    private int probabilidad;
    private boolean usada;
    private boolean usadaInicial;
+   private boolean previamenteUsada;
    
 
     public Pieza() {
@@ -122,6 +123,14 @@ public class Pieza {
 
     public void setUsadaInicial(boolean usadaInicial) {
         this.usadaInicial = usadaInicial;
+    }
+
+    public boolean isPreviamenteUsada() {
+        return previamenteUsada;
+    }
+
+    public void setPreviamenteUsada(boolean previamenteUsada) {
+        this.previamenteUsada = previamenteUsada;
     }
     
     
