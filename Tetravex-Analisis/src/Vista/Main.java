@@ -68,19 +68,25 @@ public class Main {
                        
                        else{
                            
-                           if(j==0){
-                                Pieza piezaPasada = piezasArmadas.get(i-(int)Math.sqrt(orden)-1);
-                                numero = piezaPasada.getSur();
-                                piezaActual.getPosiciones()[0] = numero;
-                           }
-                           else if(j==3){
-                                Pieza piezaPasada = piezasArmadas.get(i-2); 
-                                numero = piezaPasada.getEste(); 
-                                piezaActual.getPosiciones()[3] = numero;
-                           }
-                           else{
-                               numero = aleatorio.nextInt(limite+1);  //Llenamos sus otras posiciones de numeros random
-                               piezaActual.getPosiciones()[j] = numero;
+                           switch (j) {
+                               case 0:
+                                   {
+                                       Pieza piezaPasada = piezasArmadas.get(i-(int)Math.sqrt(orden)-1);
+                                       numero = piezaPasada.getSur();
+                                       piezaActual.getPosiciones()[0] = numero;
+                                       break;
+                                   }
+                               case 3:
+                                   {
+                                       Pieza piezaPasada = piezasArmadas.get(i-2);
+                                       numero = piezaPasada.getEste();
+                                       piezaActual.getPosiciones()[3] = numero;
+                                       break;
+                                   }
+                               default:
+                                   numero = aleatorio.nextInt(limite+1);  //Llenamos sus otras posiciones de numeros random
+                                   piezaActual.getPosiciones()[j] = numero;
+                                   break;
                            }
                        }
                    }
@@ -88,7 +94,7 @@ public class Main {
             }
             
             piezasArmadas.add(piezaActual);
-            System.out.println(piezaActual);
+            //System.out.println(piezaActual);
            
         }
     
@@ -98,7 +104,7 @@ public class Main {
         Random aleatorio = new Random();
         int numero;
         int numPieza = 1;
-        System.out.println(piezasA.size());
+        //System.out.println(piezasA.size());
         while(!piezasA.isEmpty()){
             numero = aleatorio.nextInt(piezasA.size());
             piezasA.get(numero).setNumPieza(numPieza);
@@ -112,16 +118,22 @@ public class Main {
     public static void principal(){
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
-        ArrayList<Pieza> piezasArmadasDos = new ArrayList();
         ArrayList<Pieza> temporalArmado;
+        int orden = 9;
        
-        llenarPuzzle(15, piezasArmadas, 3*3);
+        llenarPuzzle(15, piezasArmadas, orden);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
         desordenar(piezasDesordenadas, piezasArmadas);
         
         
         
-        System.out.println("Piezas Desordenas: \n");
+        
+        
+
+
+
+
+        //System.out.println("Piezas Desordenas: \n");
       //  for(int i = 0;i<piezasDesordenadas.size();i++){
         //    System.out.println(piezasDesordenadas.get(i));
       //  }
@@ -131,13 +143,12 @@ public class Main {
        
          //System.out.println(rapido.getPosiblesIzquierdas());
        //  System.out.println("Pieza inicial: "+rapido.getPiezaInicial());
-        AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
+        //AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
        
-        rapido.armarCola(3, temporalArmado);
+        //rapido.armarCola(3, temporalArmado);
         //rapido.matchesPiezas();
-        //piezasArmadasDos = (ArrayList<Pieza>) piezasArmadas.clone();
-       // System.out.println("Hola -> " + piezasArmadasDos);
-        //FuerzaBruta.comparar(piezasDesordenadas, 9);
+        //System.out.println("Armado -> " + temporalArmado);
+        FuerzaBruta.comparar(piezasDesordenadas, temporalArmado, orden);
     }
 
     public static void main(String[] args) {
