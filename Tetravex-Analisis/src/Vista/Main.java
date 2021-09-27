@@ -119,20 +119,12 @@ public class Main {
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
         ArrayList<Pieza> temporalArmado;
-        int orden = 9;
+        int orden = 3*3;
        
         llenarPuzzle(15, piezasArmadas, orden);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
         desordenar(piezasDesordenadas, piezasArmadas);
         
-        
-        
-        
-        
-
-
-
-
         //System.out.println("Piezas Desordenas: \n");
       //  for(int i = 0;i<piezasDesordenadas.size();i++){
         //    System.out.println(piezasDesordenadas.get(i));
@@ -147,8 +139,7 @@ public class Main {
        
         //rapido.armarCola(3, temporalArmado);
         //rapido.matchesPiezas();
-        //System.out.println("Armado -> " + temporalArmado);
-        FuerzaBruta.comparar(piezasDesordenadas, temporalArmado, orden);
+        FuerzaBruta.comparar(piezasDesordenadas, temporalArmado);
     }
 
     public static void main(String[] args) {
