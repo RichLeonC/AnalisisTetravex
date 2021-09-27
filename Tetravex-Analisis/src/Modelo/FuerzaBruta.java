@@ -18,98 +18,33 @@ public class FuerzaBruta {
     }
 
     
-    public static void comparar(ArrayList<Pieza> piezasDesordenadas, ArrayList<Pieza> piezasOrdenadas, int orden){
-        ArrayList<Pieza> piezasFuerzaBruta = new ArrayList();
-        ArrayList<Pieza> clonDesordenadas = (ArrayList<Pieza>) piezasDesordenadas.clone();
-        int vueltas = 0;
-        int posicion = 0;
+    public static void comparar(ArrayList<Pieza> piezasDesordenadas, ArrayList<Pieza> piezasOrdenadas){
+        ArrayList<Pieza> piezasFuerzaBruta = new ArrayList(); //Arreglo donde se resolverá el rompecabezas
+        ArrayList<Pieza> clonDesordenadas = (ArrayList<Pieza>) piezasDesordenadas.clone(); //copia de las piezas desordenadas
+        int posicion = 0; //Posición en el arreglo de piezasFuerzaBruta
+        int asignaciones = 0, comparaciones = 0; //Contador de asignaciones y comparaciones.
+        asignaciones += 3;
         
-        while(posicion != piezasDesordenadas.size()){
-            int aleatorio = (int)(Math.random()*clonDesordenadas.size());
-            if(clonDesordenadas.get(aleatorio) == piezasOrdenadas.get(posicion)){
-                piezasFuerzaBruta.add(clonDesordenadas.get(aleatorio));
-                clonDesordenadas.remove(aleatorio);
-                posicion++;
+        while(posicion != piezasDesordenadas.size()){ //Mientras no estén todas las piezas en el arreglo, no se sale del bucle
+            comparaciones ++;
+            int aleatorio = (int)(Math.random()*clonDesordenadas.size()); //Se elige una pieza de manera aleatoria
+            asignaciones ++;
+            if(clonDesordenadas.get(aleatorio) == piezasOrdenadas.get(posicion)){ 
+                comparaciones ++;
+                piezasFuerzaBruta.add(clonDesordenadas.get(aleatorio)); //Si la pieza elegida es la correcta en el arreglo de piezas ordenadas, se añade al arreglo solución.
+                clonDesordenadas.remove(aleatorio); //Se elimina la pieza elegida para que no se elija nuevamente.
+                posicion++; //Se aumenta la posición del arreglo.
             }
-            vueltas++;
+            
         }
         System.out.println("---------------Método de Fuerza Bruta---------------");
-        System.out.println("Rompecabezas Armado: \n" +  piezasFuerzaBruta);
-        System.out.println("Número de ciclos realizados: " + vueltas);
-        
-        
-        
-        
-        /*while(piezasFuerzaBruta.size() < piezasDesordenadas.size()){
-            for (int i = 0; i < clonDesordenadas.size(); i++) {
-                if (piezasFuerzaBruta.get(piezasColocadas).getEste() == clonDesordenadas.get(i).getOeste()){
-                    piezasFuerzaBruta.add(clonDesordenadas.get(i));
-                    clonDesordenadas.remove(i);
-                    piezasColocadas++;
-                    System.out.println(piezasFuerzaBruta);
-                }
-                
-            }
-        }
-        System.out.println(piezasFuerzaBruta);
-        */
-        
-        
-
-        
+        System.out.println("Rompecabezas Armado: \n" + piezasFuerzaBruta);
+        System.out.println("Asignaciones: " + asignaciones);
+        System.out.println("Comparaciones: " + comparaciones);
     }
-    
-    
-    /*public static int[] generarSecuencia(int orden){
-    
-        int index = 0; //Posición del arreglo
-        int [] aleatorios = new int [orden]; //Arreglo de numeros aleatorios
-    
-        while(index < orden) {
-            int propuesto = (int)(Math.random()*orden); //Se genera un numero aleatorio
-            boolean repetido = false;
-            while(!repetido) { //Bucle para verificar si el numero está repetido en el arreglo
-                for(int i=0; i<index; i++) {
-                    if(propuesto == aleatorios[i]) {
-                        repetido = true;
-                        break;
-                    }
-                }
-                if(!repetido) {
-                    aleatorios[index] = propuesto;
-                    index++;
-                }
-            }
-        }
-
-        return aleatorios; //Retorna el arreglo de numeros aleatorios sin repetición
-    }
-    
-    public static void comparar(ArrayList<Pieza> piezasArmadas, ArrayList<Pieza> piezasDesordenadas, int orden){
-    ArrayList<Pieza> piezasFuerzaBruta = new ArrayList();
-    ArrayList<int[]> aleatoriosRepetidos = new ArrayList();
-    int[] aleatorios;
-    int indice;
-    System.out.println("Hola -> " + piezasArmadas);
-    while (!piezasFuerzaBruta.equals(piezasArmadas)){
-    piezasFuerzaBruta.clear();
-    aleatorios = generarSecuencia(orden, aleatoriosRepetidos);
-    aleatoriosRepetidos.add(aleatorios);
-    indice = 0;
-    while(indice != orden){
-    piezasFuerzaBruta.add(piezasDesordenadas.get(aleatorios[indice]));
-    indice ++;
-    }
-    System.out.println(piezasFuerzaBruta);
-    }
-    //System.out.println(piezasFuerzaBruta);
-    }*/
-    
+        
     public FuerzaBruta() {
         
     }
-    
-    
-    
     
 }

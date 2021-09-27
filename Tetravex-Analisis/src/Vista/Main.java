@@ -119,7 +119,7 @@ public class Main {
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
         ArrayList<Pieza> temporalArmado;
-        int orden = 9;
+        int orden = 3*3;
        
         llenarPuzzle(15, piezasArmadas, 3*3);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
