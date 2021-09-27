@@ -18,8 +18,7 @@ public class Pieza {
    private HashMap<Integer, ArrayList<Pieza>> dictMatches;
    private int probabilidad;
    private boolean usada;
-   private boolean usadaInicial;
-   private boolean previamenteUsada;
+ 
    
 
     public Pieza() {
@@ -30,23 +29,10 @@ public class Pieza {
         dictMatches.put(3, new ArrayList());
         probabilidad = 0;
         usada = false;
-        usadaInicial = false;
+    
         
     }
 
-    public Pieza(int norte,int este, int sur, int oeste, int numPieza) {
-        posiciones[0]  = norte;
-        posiciones[1] = este;
-        posiciones[2] = sur;
-        posiciones[3] = oeste;
-        this.numPieza = numPieza;
-    }
-
-    public Pieza(int numPieza) {
-        this.numPieza = numPieza;
-    }
-    
-    
 
     public Integer[] getPosiciones() {
         return posiciones;
@@ -116,24 +102,6 @@ public class Pieza {
     public void setUsada(boolean usada) {
         this.usada = usada;
     }
-
-    public boolean isUsadaInicial() {
-        return usadaInicial;
-    }
-
-    public void setUsadaInicial(boolean usadaInicial) {
-        this.usadaInicial = usadaInicial;
-    }
-
-    public boolean isPreviamenteUsada() {
-        return previamenteUsada;
-    }
-
-    public void setPreviamenteUsada(boolean previamenteUsada) {
-        this.previamenteUsada = previamenteUsada;
-    }
-    
-    
 
     @Override
     public String toString() {

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -66,17 +67,17 @@ public class Main {
                          
                        }
                        
-                       else{
+                       else{ //En caso que sean piezas apartir de la segunda fila excluyendo las primeras piezas de cada fila
                            
                            switch (j) {
-                               case 0:
+                               case 0: //Le seteamos la posicion norte el valor de la posicion sur de la pieza de arriba
                                    {
                                        Pieza piezaPasada = piezasArmadas.get(i-(int)Math.sqrt(orden)-1);
                                        numero = piezaPasada.getSur();
                                        piezaActual.getPosiciones()[0] = numero;
                                        break;
                                    }
-                               case 3:
+                               case 3: //Seteamos el oeste, el valor este de la pieza de la izquierda
                                    {
                                        Pieza piezaPasada = piezasArmadas.get(i-2);
                                        numero = piezaPasada.getEste();
@@ -99,7 +100,7 @@ public class Main {
         }
     
     }
-    
+    //Funcion que se encarga de desordenar el arrayList de piezasArmadas 
     public static void desordenar(ArrayList<Pieza> piezasD, ArrayList<Pieza> piezasA){
         Random aleatorio = new Random();
         int numero;
@@ -135,10 +136,11 @@ public class Main {
        // FuerzaBruta.comparar(piezasDesordenadas, temporalArmado, orden);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+
         principal();
-        
-       
+
+    
     }
     
 }

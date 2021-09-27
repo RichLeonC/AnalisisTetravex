@@ -18,14 +18,12 @@ public class AvanceRapido {
     private final int sur = 2;
     private final int oeste = 3;
     private final ArrayList<Pieza>piezas;
-    private Pieza temp;
     private ArrayList<Pieza>posiblesIzquierdas;
     ArrayList<Pieza> piezasSolucion;
     private Pieza piezaInicial;
 
     public AvanceRapido(ArrayList<Pieza> piezas) {
         this.piezas = piezas;
-        
         posiblesIzquierdas = new ArrayList();
         piezasSolucion = new ArrayList();
     }
@@ -50,22 +48,21 @@ public class AvanceRapido {
          posiblesIzquierdas.add(piezaActual);
         } 
     }
-    
+    //Esta funcion se encarga de llenar el diccionario de cada pieza, el cual contiene todos sus posibles conexiones.
     public void matchesPiezas(){
         
+        //Recorre cada pieza que existe
         for(int k = 0;k<piezas.size();k++){
-            Pieza piezaActual = piezas.get(k);
+            Pieza piezaActual = piezas.get(k); //Por cada pieza recorre cada pieza
             for(int i = 0;i<piezas.size();i++){
                Pieza piezasNext = piezas.get(i);
                if(!piezaActual.equals(piezasNext)){
-                   
-                    if(piezaActual.getNorte() == piezasNext.getSur()){
+                   //Busca cada match de cada posicion de la pieza y lo asigna al diccionario.
+                    if(piezaActual.getNorte() == piezasNext.getSur()){ 
                         piezaActual.getDict().get(norte).add(piezasNext);
 
-                    }
-                    //if(piezaActual.getNumPieza() == 2) System.out.println("ActEste: "+piezaActual.getEste()+" == "+piezasNext.getOeste());
-                    if(piezaActual.getEste()== piezasNext.getOeste()){
-                      //  if(piezaActual.getNumPieza() == 2) System.out.println("Entre");
+                    }                   
+                    if(piezaActual.getEste()== piezasNext.getOeste()){       
                         piezaActual.getDict().get(este).add(piezasNext);
                     }
                     if(piezaActual.getSur()== piezasNext.getNorte()){
@@ -87,34 +84,31 @@ public class AvanceRapido {
         //System.out.println("\n\n");
         
     }
-    
+    //Esta funcion se encarga de elegir la pieza inicial de todas las posibles paredes izquierdas
     private void piezaInicial(){
         int mejor = 1;
         for(int i = 0;i<posiblesIzquierdas.size();i++){
             Pieza pieza = posiblesIzquierdas.get(i);
-            if(!pieza.isUsada()&&pieza.getProbabilidad()==3){
+            if(!pieza.isUsada()&&pieza.getProbabilidad()==3){ //Probabilidad 3 significa que es esquinaSup izq
                 piezaInicial = pieza;    
-                piezaInicial.setUsadaInicial(true);
                 piezaInicial.setUsada(true);
                  break;
             }
-            else if(!pieza.isUsada()&&pieza.getProbabilidad()==2) {
+            else if(!pieza.isUsada()&&pieza.getProbabilidad()==2) { //Tiene doble probabilidad de ser pared izq
                 piezaInicial = pieza;
                 mejor = 2;
-                piezaInicial.setUsadaInicial(true);
                 piezaInicial.setUsada(true);
             }
      
-            else if(!pieza.isUsada() && pieza.getProbabilidad()>=mejor){
+            else if(!pieza.isUsada() && pieza.getProbabilidad()>=mejor){ //Tiene probabilidad normal de ser pared izq
                 piezaInicial = pieza;
-                piezaInicial.setUsadaInicial(true);
                 piezaInicial.setUsada(true);
             }
         }
         
-        System.out.println("Size:"+posiblesIzquierdas.size());
-        System.out.println("Posibles Izq: "+posiblesIzquierdas);
-        System.out.println("Pieza Inicial: "+piezaInicial);
+       // System.out.println("Size:"+posiblesIzquierdas.size());
+       // System.out.println("Posibles Izq: "+posiblesIzquierdas);
+       // System.out.println("Pieza Inicial: "+piezaInicial);
         piezasSolucion.add(piezaInicial);
        
         
@@ -122,37 +116,21 @@ public class AvanceRapido {
       
         }
     
-    public Pieza primeraPieza(){
-       
-        System.out.println("Size array Este: "+piezaInicial.getDict().get(este).size());
-        System.out.println(piezaInicial);
-        Pieza pSiguiente = piezaInicial.getDict().get(este).get(0);
-        System.out.println(pSiguiente);
-        pSiguiente.setUsada(true);
-        piezasSolucion.add(pSiguiente);
-        return pSiguiente;
-    }
     
-    
-    
-
-    
-    public Pieza setPieza(Pieza pSiguiente){
+    public Pieza setPieza(Pieza pSiguiente){ //Realiza un set de atributos de una pieza a otra
         Pieza pActual = new Pieza();
         pActual.setPosiciones(pSiguiente.getPosiciones());
         pActual.setDict(pSiguiente.getDict());
         pActual.setProbabilidad(pSiguiente.getProbabilidad());
         pActual.setUsada(pSiguiente.isUsada());
-        pActual.setUsadaInicial(pSiguiente.isUsadaInicial());
         pActual.setNumPieza(pSiguiente.getNumPieza());
         return pActual;
     }
 
-    public void armarCola(int limite, ArrayList<Pieza> armado){
+    public void armarCola(int limite, ArrayList<Pieza> armado){ //Funcion recursiva que arma el tetravex 
         matchesPiezas();
         //piezaInicial();
-        piezaInicial = armado.get(0);
-        piezaInicial.setUsadaInicial(true);
+        piezaInicial = armado.get(0); //Marcamos la pieza inicial como la esquina sup izq
         piezaInicial.setUsada(true);    
         piezasSolucion.add(piezaInicial);
         Pieza pActual = piezaInicial;
@@ -160,44 +138,37 @@ public class AvanceRapido {
         System.out.println("Pactual: "+pActual);
         armarAux(limite,pActual,null,2);
     }
-    public Pieza buscaMatch(Pieza pActual,int ubicacion){
+    //Inserta la pieza que coincide en la posicion indicada (ubicacion) de la pieza pasada por parametro
+    public Pieza buscaMatch(Pieza pActual,int ubicacion){ 
         int cont = 0;
         ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion);
-        
-        //System.out.println("ubic size: "+ubicaciones.size());
+   
         if(!ubicaciones.isEmpty()) {
          
             while(cont<ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
-                if(!piezasSolucion.contains(ubicaciones.get(cont))) ubicaciones.get(cont).setUsada(false);
+               if(!piezasSolucion.contains(ubicaciones.get(cont))) ubicaciones.get(cont).setUsada(false);
                 
                cont++;                                                                     //Incrementa hasta que encuentre uno no usado
-               if(cont>=ubicaciones.size()){
-                    for(Pieza pieza:ubicaciones){
-                    
-                       if(!piezasSolucion.contains(pieza)) pieza.setUsada(false);
-                    }
-                    break;
-                }
             }
-            if(cont>=ubicaciones.size()) return null;
+            if(cont>=ubicaciones.size()) return null; //Si no encontro ninguna pieza no usada, retorna null
             Pieza pSiguiente = ubicaciones.get(cont);
-           // System.out.println("Pieza SiguienteX: "+pSiguiente);
             pSiguiente.setUsada(true); 
-            piezasSolucion.add(pSiguiente);
+            piezasSolucion.add(pSiguiente); //Agrega la pieza
             return pSiguiente;
             
         }
         return null;
     }
     
+    //Funcion que verifica que pieza encaja con la que tiene al lado izquierdo y arriba de esta.
     public Pieza piezaCentral(Pieza pActual,int numeroEste){
         
-        ArrayList<Pieza> sures  = pActual.getDict().get(sur);
+        ArrayList<Pieza> sures  = pActual.getDict().get(sur); //Obtenemos los matches en el sur 
         for (Pieza sure : sures) {
-            if(sure.getOeste() == numeroEste && !sure.isUsada()){
+            if(sure.getOeste() == numeroEste && !sure.isUsada()){ //Pregunta si encuentra una pieza que coincida
                  Pieza pSiguiente = sure;  
                  sure.setUsada(true);
-                 piezasSolucion.add(pSiguiente);
+                 piezasSolucion.add(pSiguiente); //Agregar
                  return pSiguiente;
              }
              
@@ -206,68 +177,61 @@ public class AvanceRapido {
     }
     
    
-    
+    //Esta funcion se devuelve a la pieza anterior.
     public Pieza devolverse(Pieza pActual,int indice,int limite){
 
         pActual = piezasSolucion.get(indice-2);
         pActual.setUsada(true);
         //pActual.setPreviamenteUsada(true);
         System.out.println("Pieza Eliminada: "+pActual);
-        piezasSolucion.remove(indice-2);
+        piezasSolucion.remove(indice-2); //La elimina de las soluciones
         
       
        System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
-       return piezasSolucion.get(indice-3);
+       return piezasSolucion.get(indice-3); //Retorna la pieza anterior.
         
     }
+    
+    //Funcion auxiliar de armarCola, que arma el tetravex
     public int armarAux(int limite, Pieza pActual,Pieza pSiguiente,int indice){
-        
+        //Termina hasta que todas las piezas esten en el array de solucion.
         if(piezasSolucion.size() == limite*limite) return 1;
         
-        else{
+        else{ 
             if(indice<=limite){ //Estamos en primera fila
 
                pActual =  buscaMatch(pActual, este);
-                System.out.println("------------------------------");
-               System.out.println("indice: "+indice);
-               System.out.println("Pactual: "+pActual);
+                //System.out.println("------------------------------");
+             //  System.out.println("indice: "+indice);
+              // System.out.println("Pactual: "+pActual);
                
               
-               if(pActual!=null) {
-                   
-                   armarAux(limite, pActual, null, indice+1);
-               }
-               else{
-                   armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
-               }
+               if(pActual!=null)  armarAux(limite, pActual, null, indice+1); //Si encontro la pieza, avanza con la siguiente
                
+               else armarAux(limite,devolverse(pActual, indice,limite),null,indice-1); //sino, se devuelve
+   
             }
-            else if(isPrimera(limite, indice)){
+            else if(isPrimera(limite, indice)){ // Si es primera pieza de fila 
            
-                pActual =piezasSolucion.get(indice-limite-1);   
-                pActual=buscaMatch(pActual, sur);
-                System.out.println("------------------------------");
-                System.out.println("indice: "+indice);
-                System.out.println("Pactual: "+pActual);
-                 if(pActual!=null){
-                     
-                     armarAux(limite, pActual, null, indice+1);
-                 }
+                pActual =piezasSolucion.get(indice-limite-1);  //Obtenemos la pieza que esta arriba de la que buscamos 
+                pActual=buscaMatch(pActual, sur);              
+               // System.out.println("------------------------------");
+              //  System.out.println("indice: "+indice);
+              //  System.out.println("Pactual: "+pActual);
+                 if(pActual!=null)   armarAux(limite, pActual, null, indice+1);
                  else armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
                  
             }
             else{
                
-                int numeroEste = pActual.getEste(); 
-                pActual = piezasSolucion.get(indice-limite-1);
-                pActual = piezaCentral(pActual, numeroEste);
-                System.out.println("------------------------------");
-                System.out.println("indice: "+indice);
-                System.out.println("Pactual: "+pActual);
-                if(pActual!=null){
-                   
-                    armarAux(limite, pActual, null, indice+1);
-                }
+                int numeroEste = pActual.getEste();  //De la pieza izquierda obtenemos el valor en la posicion "este" para realizar el match
+                pActual = piezasSolucion.get(indice-limite-1); //Obtenemos la pieza de arriba de la que buscamos.
+                pActual = piezaCentral(pActual, numeroEste); //Buscamos una pieza que coincida
+                //System.out.println("------------------------------");
+               // System.out.println("indice: "+indice);
+               // System.out.println("Pactual: "+pActual);
+                if(pActual!=null) armarAux(limite, pActual, null, indice+1);
+                
                 else armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
                 
             }
