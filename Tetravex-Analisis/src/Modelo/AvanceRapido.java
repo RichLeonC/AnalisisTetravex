@@ -22,6 +22,9 @@ public class AvanceRapido {
     private ArrayList<Pieza>posiblesIzquierdas;
     ArrayList<Pieza> piezasSolucion;
     private Pieza piezaInicial;
+    
+    private int c;
+    private int a;
 
     public AvanceRapido(ArrayList<Pieza> piezas) {
         this.piezas = piezas;
@@ -33,6 +36,17 @@ public class AvanceRapido {
     private boolean isPrimera(int numero,int posicion){ //Verifica si la pieza pasada era multiplo
         return (posicion-1)%numero == 0;
     }
+
+    public int getC() {
+        return c;
+    }
+
+    public int getA() {
+        return a;
+    }
+    
+    
+    
     //Esta funcion decide si es posible pared izquierda y le asigna una probabilidad de serlo.
     private void decidirProbabilidad(Pieza piezaActual, ArrayList<Pieza> posiblesIzquierdas){
         if(piezaActual.getDict().get(oeste).isEmpty() && piezaActual.getDict().get(norte).isEmpty() &&
@@ -152,10 +166,12 @@ public class AvanceRapido {
         matchesPiezas();
         //piezaInicial();
         piezaInicial = armado.get(0);
+        a++;// asignacion
         piezaInicial.setUsadaInicial(true);
         piezaInicial.setUsada(true);    
         piezasSolucion.add(piezaInicial);
         Pieza pActual = piezaInicial;
+        a++; //asignacion
         System.out.println("Indice: "+1);
         System.out.println("Pactual: "+pActual);
         armarAux(limite,pActual,null,2);
@@ -220,21 +236,27 @@ public class AvanceRapido {
        return piezasSolucion.get(indice-3);
         
     }
+    
+    
     public int armarAux(int limite, Pieza pActual,Pieza pSiguiente,int indice){
         
-        if(piezasSolucion.size() == limite*limite) return 1;
+        if(piezasSolucion.size() == limite*limite){ 
+            c++;//comparacion
+            
+            return 1;}
         
         else{
             if(indice<=limite){ //Estamos en primera fila
-
+                c++;// comparacion
                pActual =  buscaMatch(pActual, este);
-                System.out.println("------------------------------");
+               a++;// asignacion
+               System.out.println("------------------------------");
                System.out.println("indice: "+indice);
                System.out.println("Pactual: "+pActual);
                
               
                if(pActual!=null) {
-                   
+                   c++;//comparacion
                    armarAux(limite, pActual, null, indice+1);
                }
                else{
@@ -243,14 +265,16 @@ public class AvanceRapido {
                
             }
             else if(isPrimera(limite, indice)){
-           
-                pActual =piezasSolucion.get(indice-limite-1);   
+                c++; //comparacion
+                pActual =piezasSolucion.get(indice-limite-1);
+                a++; //asignacion
                 pActual=buscaMatch(pActual, sur);
+                a++; //asignacion
                 System.out.println("------------------------------");
                 System.out.println("indice: "+indice);
                 System.out.println("Pactual: "+pActual);
                  if(pActual!=null){
-                     
+                     c++;//comparacion 
                      armarAux(limite, pActual, null, indice+1);
                  }
                  else armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
@@ -259,13 +283,16 @@ public class AvanceRapido {
             else{
                
                 int numeroEste = pActual.getEste(); 
+                 a++; //asignacion
                 pActual = piezasSolucion.get(indice-limite-1);
+                 a++; //asignacion
                 pActual = piezaCentral(pActual, numeroEste);
+                 a++; //asignacion
                 System.out.println("------------------------------");
                 System.out.println("indice: "+indice);
                 System.out.println("Pactual: "+pActual);
                 if(pActual!=null){
-                   
+                    c++; //comparacion
                     armarAux(limite, pActual, null, indice+1);
                 }
                 else armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
