@@ -121,7 +121,7 @@ public class Main {
         ArrayList<Pieza> temporalArmado;
         int orden = 3*3;
        
-        llenarPuzzle(15, piezasArmadas, 3*3);
+        llenarPuzzle(9, piezasArmadas, 3*3);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
         System.out.println(piezasArmadas);
         desordenar(piezasDesordenadas, piezasArmadas);

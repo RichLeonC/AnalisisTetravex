@@ -216,7 +216,7 @@ public class AvanceRapido {
         piezasSolucion.remove(indice-2);
         
       
-        System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
+       System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
        return piezasSolucion.get(indice-3);
         
     }
