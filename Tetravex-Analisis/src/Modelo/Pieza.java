@@ -137,7 +137,8 @@ public class Pieza {
 
     @Override
     public String toString() {
-        return "Pieza{" + "posiciones={" + getNorte() +","+getEste()+","+getSur()+","+getOeste()+"}"+ ", numPieza=" + numPieza + '}';
+        return "Pieza{" + "posiciones={" + getNorte() +","+getEste()+","+getSur()+","+getOeste()+"}"
+                + ", numPieza=" + numPieza + '}'+"\n";
     }
         
     

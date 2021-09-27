@@ -17,7 +17,8 @@ public class AvanceRapido {
     private final int este = 1;
     private final int sur = 2;
     private final int oeste = 3;
-    private ArrayList<Pieza>piezas;
+    private final ArrayList<Pieza>piezas;
+    private Pieza temp;
     private ArrayList<Pieza>posiblesIzquierdas;
     ArrayList<Pieza> piezasSolucion;
     private Pieza piezaInicial;
@@ -78,12 +79,12 @@ public class AvanceRapido {
                  }
                 
             }
-            System.out.println(piezaActual+" estes: "+piezaActual.getDict().get(este));
-            System.out.println(piezaActual+" sures: "+piezaActual.getDict().get(sur));
+           // System.out.println(piezaActual+" estes: "+piezaActual.getDict().get(este));
+           // System.out.println(piezaActual+" sures: "+piezaActual.getDict().get(sur));
             decidirProbabilidad(piezaActual, posiblesIzquierdas);
              
         }
-        System.out.println("\n\n");
+        //System.out.println("\n\n");
         
     }
     
@@ -165,17 +166,18 @@ public class AvanceRapido {
         
         //System.out.println("ubic size: "+ubicaciones.size());
         if(!ubicaciones.isEmpty()) {
-            while(cont<ubicaciones.size()&&(ubicaciones.get(cont).isUsada()||ubicaciones.get(cont).isPreviamenteUsada())){ //Pregunta si el match que se escogera esta usado
-               // if(!piezasSolucion.contains(ubicaciones.get(cont))) ubicaciones.get(cont).setUsada(false);
-   
-                if(cont>=ubicaciones.size()){
+         
+            while(cont<ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
+                if(!piezasSolucion.contains(ubicaciones.get(cont))) ubicaciones.get(cont).setUsada(false);
+                
+               cont++;                                                                     //Incrementa hasta que encuentre uno no usado
+               if(cont>=ubicaciones.size()){
                     for(Pieza pieza:ubicaciones){
-                        System.out.println("x");
+                    
                        if(!piezasSolucion.contains(pieza)) pieza.setUsada(false);
                     }
                     break;
                 }
-                else cont++;                                                                     //Incrementa hasta que encuentre uno no usado
             }
             if(cont>=ubicaciones.size()) return null;
             Pieza pSiguiente = ubicaciones.get(cont);
@@ -193,8 +195,7 @@ public class AvanceRapido {
         ArrayList<Pieza> sures  = pActual.getDict().get(sur);
         for (Pieza sure : sures) {
             if(sure.getOeste() == numeroEste && !sure.isUsada()){
-                 Pieza pSiguiente = sure;
-                // System.out.println("Pieza Siguiente: "+pSiguiente);
+                 Pieza pSiguiente = sure;  
                  sure.setUsada(true);
                  piezasSolucion.add(pSiguiente);
                  return pSiguiente;
@@ -204,18 +205,13 @@ public class AvanceRapido {
         return null;
     }
     
-    public boolean tieneSolucion(){
-        for(Pieza p : piezas){
-            if(!p.isUsada()) return true;
-        }
-        return false;
-    }
+   
     
     public Pieza devolverse(Pieza pActual,int indice,int limite){
-       // piezasSolucion.remove(indice-2);
+
         pActual = piezasSolucion.get(indice-2);
         pActual.setUsada(true);
-        pActual.setPreviamenteUsada(true);
+        //pActual.setPreviamenteUsada(true);
         System.out.println("Pieza Eliminada: "+pActual);
         piezasSolucion.remove(indice-2);
         
@@ -228,10 +224,9 @@ public class AvanceRapido {
         
         if(piezasSolucion.size() == limite*limite) return 1;
         
-        else if(tieneSolucion()){
+        else{
             if(indice<=limite){ //Estamos en primera fila
-               
-             //  Pieza pTemporal = setPieza(pActual);
+
                pActual =  buscaMatch(pActual, este);
                 System.out.println("------------------------------");
                System.out.println("indice: "+indice);
@@ -243,9 +238,7 @@ public class AvanceRapido {
                    armarAux(limite, pActual, null, indice+1);
                }
                else{
-               
                    armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
-                  // pTemporal.setUsada(false);
                }
                
             }
@@ -279,9 +272,7 @@ public class AvanceRapido {
                 
             }
         }
-        else{
-           // armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
-        }
+    
        
         return 0;
     }
