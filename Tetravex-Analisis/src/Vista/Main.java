@@ -8,6 +8,7 @@ package Vista;
 import Modelo.AvanceRapido;
 import Modelo.FuerzaBruta;
 import Modelo.Pieza;
+import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -131,16 +132,25 @@ public class Main {
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
        
         rapido.armarCola(3, temporalArmado);
+        
+        System.out.println("Asignaciones: "+rapido.getA() + ", Comparaciones:" +rapido.getC());
      
         //System.out.println("Armado -> " + temporalArmado);
        // FuerzaBruta.comparar(piezasDesordenadas, temporalArmado, orden);
     }
 
-    public static void main(String[] args) throws InterruptedException {
-
-        principal();
-
-    
+    public static void main(String[] args) {
+       
+       
+        long startTime = System.nanoTime();
+         principal();
+       long endTime = System.nanoTime();
+       
+       long timeElapsed = endTime- startTime;
+        
+        
+        System.out.println("Execution time in milliseconds: " + timeElapsed / 1000000);
+       
     }
     
 }
