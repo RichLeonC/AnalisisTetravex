@@ -214,7 +214,7 @@ public class AvanceRapido {
     public Pieza devolverse(Pieza pActual,int indice,int limite){
        // piezasSolucion.remove(indice-2);
         pActual = piezasSolucion.get(indice-2);
-        pActual.setUsada(false);
+        pActual.setUsada(true);
         pActual.setPreviamenteUsada(true);
         System.out.println("Pieza Eliminada: "+pActual);
         piezasSolucion.remove(indice-2);
