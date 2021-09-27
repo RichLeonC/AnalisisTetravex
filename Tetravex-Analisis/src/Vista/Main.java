@@ -134,6 +134,8 @@ public class Main {
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
        
         rapido.armarCola(3, temporalArmado);
+       
+        System.out.println( rapido.getVueltas());
         //rapido.matchesPiezas();
         //piezasArmadasDos = (ArrayList<Pieza>) piezasArmadas.clone();
        // System.out.println("Hola -> " + piezasArmadasDos);
