@@ -6,9 +6,7 @@
 package Vista;
 
 import Modelo.AvanceRapido;
-import Modelo.FuerzaBruta;
 import Modelo.Pieza;
-import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -121,17 +119,19 @@ public class Main {
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
         ArrayList<Pieza> temporalArmado;
-        int orden = 3*3;
+        int cantidadPiezas = 5*5;
+        int orden = 5;
        
-        llenarPuzzle(9, piezasArmadas, 3*3);
+        llenarPuzzle(9, piezasArmadas, cantidadPiezas);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
-        System.out.println(piezasArmadas);
         desordenar(piezasDesordenadas, piezasArmadas);
+        System.out.println("Piezas desordenadas ");
+        System.out.println(piezasDesordenadas);
 
-      
+        System.out.println("Avance rapido");
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
        
-        rapido.armarCola(3, temporalArmado);
+        rapido.armarCola(orden, temporalArmado);
         
         System.out.println("Asignaciones: "+rapido.getA() + ", Comparaciones:" +rapido.getC());
      
@@ -149,7 +149,7 @@ public class Main {
        long timeElapsed = endTime- startTime;
         
         
-        System.out.println("Execution time in milliseconds: " + timeElapsed / 1000000);
+        System.out.println("Tiempo de ejecución en milisegundos: " + timeElapsed / 1000000);
        
     }
     

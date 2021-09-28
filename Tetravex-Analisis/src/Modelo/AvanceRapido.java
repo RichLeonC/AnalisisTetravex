@@ -12,6 +12,11 @@ import java.util.ArrayList;
  *
  * @author richa
  */
+
+/**
+ * Esta clase recibe arrayList de piezas  
+ * @author richa
+ */
 public class AvanceRapido {
     private final int norte = 0;
     private final int este = 1;
@@ -212,7 +217,7 @@ public class AvanceRapido {
         
         if(piezasSolucion.size() == limite*limite){ 
             c++;//comparacion
-            
+            System.out.println(piezasSolucion);
             return 1;}
         
         else{ 
@@ -229,10 +234,7 @@ public class AvanceRapido {
                    c++;//comparacion
                    armarAux(limite, pActual, null, indice+1);
                }
-               else{
-                   armarAux(limite,devolverse(pActual, indice,limite),null,indice-1);
-               }
-               
+          
                else armarAux(limite,devolverse(pActual, indice,limite),null,indice-1); //sino, se devuelve
    
             }
