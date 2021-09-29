@@ -131,7 +131,7 @@ public class Main {
         System.out.println("Avance rapido");
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
        
-        //rapido.armarCola(orden, temporalArmado);
+        rapido.armarCola(100, temporalArmado);
         
         System.out.println("Asignaciones: "+rapido.getA() + ", Comparaciones:" +rapido.getC());
      
