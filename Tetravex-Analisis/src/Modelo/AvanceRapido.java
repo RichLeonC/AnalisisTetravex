@@ -12,6 +12,11 @@ import java.util.ArrayList;
  *
  * @author richa
  */
+
+/**
+ * Esta clase recibe arrayList de piezas  
+ * @author richa
+ */
 public class AvanceRapido {
     private final int norte = 0;
     private final int este = 1;
