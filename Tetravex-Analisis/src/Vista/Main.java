@@ -122,7 +122,7 @@ public class Main {
         int cantidadPiezas = 5*5;
         int orden = 5;
        
-        llenarPuzzle(9, piezasArmadas, cantidadPiezas);
+        llenarPuzzle(5, piezasArmadas, cantidadPiezas);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
         desordenar(piezasDesordenadas, piezasArmadas);
         System.out.println("Piezas desordenadas ");
@@ -130,8 +130,8 @@ public class Main {
 
         System.out.println("Avance rapido");
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
-       
-        rapido.armarCola(100, temporalArmado);
+        rapido.matchesPiezas();
+        rapido.armarCola(5, temporalArmado);
         
         System.out.println("Asignaciones: "+rapido.getA() + ", Comparaciones:" +rapido.getC());
      

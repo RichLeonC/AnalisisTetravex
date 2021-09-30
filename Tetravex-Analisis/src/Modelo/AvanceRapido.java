@@ -72,34 +72,32 @@ public class AvanceRapido {
         
         //Recorre cada pieza que existe
         for(int k = 0;k<piezas.size();k++){
-            a++;
-            c++;
+          
             Pieza piezaActual = piezas.get(k); //Por cada pieza recorre cada pieza
-            a++;
+            
             for(int i = 0;i<piezas.size();i++){
-                a++;
-                c++;
+               
                Pieza piezasNext = piezas.get(i);
-               a++;
+               
                 if(!piezaActual.equals(piezasNext)){
-                    c++;
+                   
                    //Busca cada match de cada posicion de la pieza y lo asigna al diccionario.
                     if(piezaActual.getNorte() == piezasNext.getSur()){ 
-                        c++;
+                       
                         piezaActual.getDict().get(norte).add(piezasNext);
                         
 
                     }                   
                     if(piezaActual.getEste()== piezasNext.getOeste()){ 
-                        c++;
+                        
                         piezaActual.getDict().get(este).add(piezasNext);
                     }
                     if(piezaActual.getSur()== piezasNext.getNorte()){
-                        c++;
+                       
                        piezaActual.getDict().get(sur).add(piezasNext);
                     }
                     if(piezaActual.getOeste()== piezasNext.getEste()){
-                        c++;
+                        
                         piezaActual.getDict().get(oeste).add(piezasNext);
                     }
                  }
@@ -158,7 +156,7 @@ public class AvanceRapido {
     }
 //22
     public void armarCola(int limite, ArrayList<Pieza> armado){ //Funcion recursiva que arma el tetravex 
-        matchesPiezas();
+        
         //piezaInicial();
         piezaInicial = armado.get(0); //Marcamos la pieza inicial como la esquina sup izq
         a++;
