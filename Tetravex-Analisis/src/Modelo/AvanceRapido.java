@@ -160,15 +160,15 @@ public class AvanceRapido {
         //piezaInicial();
         piezaInicial = armado.get(0); //Marcamos la pieza inicial como la esquina sup izq
         a++;
-         System.out.println("A: " + getA());
+       //  System.out.println("A: " + getA());
         piezaInicial.setUsada(true);    
         piezasSolucion.add(piezaInicial);
         Pieza pActual = piezaInicial;
         a++; //asignacion
-         System.out.println("A: " + getA());
+       //  System.out.println("A: " + getA());
         
-     //   System.out.println("Indice: "+1);
-     //   System.out.println("Pactual: "+pActual);
+        System.out.println("Indice: "+1);
+        System.out.println("Pactual: "+pActual);
         armarAux(limite,pActual,null,2);
     }
     //27
@@ -218,12 +218,12 @@ public class AvanceRapido {
         pActual = piezasSolucion.get(indice-2);
         a++;
         pActual.setUsada(true);
-        //pActual.setPreviamenteUsada(true);
-       // System.out.println("Pieza Eliminada: "+pActual);
+      //  pActual.setPreviamenteUsada(true);
+        System.out.println("Pieza Eliminada: "+pActual);
         piezasSolucion.remove(indice-2); //La elimina de las soluciones
         
       
-      // System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
+       System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
        return piezasSolucion.get(indice-3); //Retorna la pieza anterior.
         
     }
@@ -233,19 +233,19 @@ public class AvanceRapido {
         
         if(piezasSolucion.size() == limite*limite){ 
             c++;//comparacion
-           System.out.println("C: " + getC());
+            System.out.println("C: " + getC());
             return 1;}
         
         else{ 
             if(indice<=limite){ //Estamos en primera fila
                 c++;// comparacion
-                System.out.println("C: " + getC());
+               System.out.println("C: " + getC());
                pActual =  buscaMatch(pActual, este);
                a++;// asignacion
                System.out.println("A: " + getA());
                System.out.println("------------------------------");
                System.out.println("indice: "+indice);
-              System.out.println("Pactual: "+pActual);
+               System.out.println("Pactual: "+pActual);
                
               
                if(pActual!=null) {
@@ -260,16 +260,16 @@ public class AvanceRapido {
             }
             else if(isPrimera(limite, indice)){
                 c++; //comparacion
-                 System.out.println("C: " + getC());
+                System.out.println("C: " + getC());
                 pActual =piezasSolucion.get(indice-limite-1);
                 a++; //asignacion
-                 System.out.println("A: " + getA());
+                System.out.println("A: " + getA());
                 pActual=buscaMatch(pActual, sur);
                 a++; //asignacion
-                 System.out.println("A: " + getA());
-                System.out.println("------------------------------");
-                System.out.println("indice: "+indice);
-                System.out.println("Pactual: "+pActual);
+                  System.out.println("A: " + getA());
+                  System.out.println("------------------------------");
+                  System.out.println("indice: "+indice);
+                  System.out.println("Pactual: "+pActual);
                  if(pActual!=null){
                      c++;//comparacion 
                      System.out.println("C: " + getC());
@@ -282,13 +282,13 @@ public class AvanceRapido {
                
                 int numeroEste = pActual.getEste(); 
                  a++; //asignacion
-                  System.out.println("A: " + getA());
+                System.out.println("A: " + getA());
                 pActual = piezasSolucion.get(indice-limite-1);
                  a++; //asignacion
-                  System.out.println("A: " + getA());
+                System.out.println("A: " + getA());
                 pActual = piezaCentral(pActual, numeroEste);
                  a++; //asignacion
-                 System.out.println("A: " + getA());
+                System.out.println("A: " + getA());
                 System.out.println("------------------------------");
                 System.out.println("indice: "+indice);
                 System.out.println("Pactual: "+pActual);
