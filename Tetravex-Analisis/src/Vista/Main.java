@@ -6,18 +6,20 @@
 package Vista;
 
 import Modelo.AvanceRapido;
+import Modelo.FuerzaBruta;
 import Modelo.Pieza;
 import java.util.ArrayList;
 import java.util.Random;
 
+//Melissa Alguera Castillo
+//Adrian Herrera Segura AKA Atloide
+//Richard Leon Chinchilla
 
-import java.util.concurrent.TimeUnit;
+//Fecha inicio: 12 de Setiembre
+//Fecha ultima modificacion: 01 de Octubre
 
 
 public class Main {
-    
-    
-   
     
     public static boolean isPrimera(int numero,int posicion){ //Verifica si la pieza pasada era multiplo
         return (posicion-1)%numero == 0;
@@ -94,7 +96,6 @@ public class Main {
             }
             
             piezasArmadas.add(piezaActual);
-            //System.out.println(piezaActual);
            
         }
     
@@ -104,7 +105,6 @@ public class Main {
         Random aleatorio = new Random();
         int numero;
         int numPieza = 1;
-        //System.out.println(piezasA.size());
         while(!piezasA.isEmpty()){
             numero = aleatorio.nextInt(piezasA.size());
             piezasA.get(numero).setNumPieza(numPieza);
@@ -114,29 +114,31 @@ public class Main {
        }
     
     }
-    
+    //Funcion principal en donde se hacen la llamada de los algoritmos
     public static void principal(){
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
         ArrayList<Pieza> temporalArmado;
-        int cantidadPiezas = 60*60;
-        int orden = 60;
+        int cantidadPiezas = 3*3;
+        int orden = 3;
        
-        llenarPuzzle(15, piezasArmadas, cantidadPiezas);
+        llenarPuzzle(9, piezasArmadas, cantidadPiezas);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
         desordenar(piezasDesordenadas, piezasArmadas);
-        System.out.println("Piezas armadas ");
-        System.out.println(temporalArmado);
+        System.out.println("Piezas Desordenadas ");
+        System.out.println(piezasDesordenadas);
 
-       // System.out.println("Avance rapido");
+        FuerzaBruta.comparar(piezasDesordenadas, temporalArmado);
+     
         AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
-       // rapido.matchesPiezas();
+   
         rapido.armarCola(orden, temporalArmado);
-        
+      
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Avance Rápido: "+"\n"+rapido.piezasSolucion);
         System.out.println("Asignaciones: "+rapido.getA() + ", Comparaciones:" +rapido.getC());
      
-      //  System.out.println("Armado -> " + temporalArmado);
-        //FuerzaBruta.comparar(piezasDesordenadas, temporalArmado, orden);
+
     }
 
     public static void main(String[] args) {

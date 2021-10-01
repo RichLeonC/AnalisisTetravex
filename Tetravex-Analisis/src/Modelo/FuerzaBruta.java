@@ -6,7 +6,7 @@
 package Modelo;
 
 import java.util.ArrayList;
-
+//Clase encargada de armar el rompecabezas Tetravex con algoritmo fuerza bruta
 public class FuerzaBruta {
     
     ArrayList<Pieza> piezasArmadas;
@@ -17,7 +17,7 @@ public class FuerzaBruta {
         this.piezasDesordenadas = piezasDesordenadas;
     }
 
-    
+    //Funcion encargada de armar el rompecabezas.
     public static void comparar(ArrayList<Pieza> piezasDesordenadas, ArrayList<Pieza> piezasOrdenadas){
         ArrayList<Pieza> piezasFuerzaBruta = new ArrayList(); //Arreglo donde se resolverá el rompecabezas
         ArrayList<Pieza> clonDesordenadas = (ArrayList<Pieza>) piezasDesordenadas.clone(); //copia de las piezas desordenadas
