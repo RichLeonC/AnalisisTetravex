@@ -158,11 +158,14 @@ public class AvanceRapido {
     public void armarCola(int limite, ArrayList<Pieza> armado){ //Funcion recursiva que arma el tetravex 
         
         //piezaInicial();
+        matchesPiezas();
         piezaInicial = armado.get(0); //Marcamos la pieza inicial como la esquina sup izq
         a++;
          System.out.println("A: " + getA());
         piezaInicial.setUsada(true);    
+        a++;
         piezasSolucion.add(piezaInicial);
+        a++;
         Pieza pActual = piezaInicial;
         a++; //asignacion
          System.out.println("A: " + getA());
@@ -175,19 +178,25 @@ public class AvanceRapido {
     //Inserta la pieza que coincide en la posicion indicada (ubicacion) de la pieza pasada por parametro
     public Pieza buscaMatch(Pieza pActual,int ubicacion){ 
         int cont = 0;
+        a++;
         ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion);
+        a++;
    
         if(!ubicaciones.isEmpty()) {
-         
+            c++;
             while(cont<ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
                if(!piezasSolucion.contains(ubicaciones.get(cont))) ubicaciones.get(cont).setUsada(false);
-                
+                c++;
                cont++;                                                                     //Incrementa hasta que encuentre uno no usado
             }
             if(cont>=ubicaciones.size()) return null; //Si no encontro ninguna pieza no usada, retorna null
+            c++;
             Pieza pSiguiente = ubicaciones.get(cont);
+            a++;
             pSiguiente.setUsada(true); 
+            a++;
             piezasSolucion.add(pSiguiente); //Agrega la pieza
+            a++;
             return pSiguiente;
             
         }
@@ -199,11 +208,17 @@ public class AvanceRapido {
     public Pieza piezaCentral(Pieza pActual,int numeroEste){
         
         ArrayList<Pieza> sures  = pActual.getDict().get(sur); //Obtenemos los matches en el sur 
+        a++;
         for (Pieza sure : sures) {
+            c++;
             if(sure.getOeste() == numeroEste && !sure.isUsada()){ //Pregunta si encuentra una pieza que coincida
+                
                  Pieza pSiguiente = sure;  
+                 a++;
                  sure.setUsada(true);
+                 a++;
                  piezasSolucion.add(pSiguiente); //Agregar
+                 a++;
                  return pSiguiente;
              }
              
@@ -218,6 +233,7 @@ public class AvanceRapido {
         pActual = piezasSolucion.get(indice-2);
         a++;
         pActual.setUsada(true);
+        a++;
         //pActual.setPreviamenteUsada(true);
        // System.out.println("Pieza Eliminada: "+pActual);
         piezasSolucion.remove(indice-2); //La elimina de las soluciones
@@ -230,9 +246,9 @@ public class AvanceRapido {
     
     //51
     public int armarAux(int limite, Pieza pActual,Pieza pSiguiente,int indice){
-        
+            c++;
         if(piezasSolucion.size() == limite*limite){ 
-            c++;//comparacion
+            //comparacion
            System.out.println("C: " + getC());
             return 1;}
         
