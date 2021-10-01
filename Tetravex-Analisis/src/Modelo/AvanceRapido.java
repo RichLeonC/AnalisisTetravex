@@ -147,11 +147,22 @@ public class AvanceRapido {
     public Pieza setPieza(Pieza pSiguiente){ //Realiza un set de atributos de una pieza a otra
         Pieza pActual = new Pieza();
         a++;
+        System.out.println("A: "+a);
         pActual.setPosiciones(pSiguiente.getPosiciones());
+        a++;
+        System.out.println("A: "+a);
         pActual.setDict(pSiguiente.getDict());
+        a++;
+        System.out.println("A: "+a);
         pActual.setProbabilidad(pSiguiente.getProbabilidad());
+        a++;
+        System.out.println("A: "+a);
         pActual.setUsada(pSiguiente.isUsada());
+        a++;
+        System.out.println("A: "+a);
         pActual.setNumPieza(pSiguiente.getNumPieza());
+        a++;
+        System.out.println("A: " + a);
         return pActual;
     }
 //22
@@ -161,14 +172,16 @@ public class AvanceRapido {
         matchesPiezas();
         piezaInicial = armado.get(0); //Marcamos la pieza inicial como la esquina sup izq
         a++;
-       //  System.out.println("A: " + getA());
+         System.out.println("A: " + getA());
         piezaInicial.setUsada(true);    
         a++;
+        System.out.println("A: "+a);
         piezasSolucion.add(piezaInicial);
         a++;
+        System.out.println("A: "+a);
         Pieza pActual = piezaInicial;
         a++; //asignacion
-       //  System.out.println("A: " + getA());
+        System.out.println("A: " + getA());
         
         System.out.println("Indice: "+1);
         System.out.println("Pactual: "+pActual);
@@ -179,24 +192,33 @@ public class AvanceRapido {
     public Pieza buscaMatch(Pieza pActual,int ubicacion){ 
         int cont = 0;
         a++;
+        System.out.println("A: "+a);
+        
         ArrayList<Pieza> ubicaciones  = pActual.getDict().get(ubicacion);
         a++;
+        System.out.println("A: "+a);
    
         if(!ubicaciones.isEmpty()) {
             c++;
+            System.out.println("C: "+c);
             while(cont<ubicaciones.size()&&ubicaciones.get(cont).isUsada()){ //Pregunta si el match que se escogera esta usado
                if(!piezasSolucion.contains(ubicaciones.get(cont))) ubicaciones.get(cont).setUsada(false);
                 c++;
+                System.out.println("C: "+c);
                cont++;                                                                     //Incrementa hasta que encuentre uno no usado
             }
             if(cont>=ubicaciones.size()) return null; //Si no encontro ninguna pieza no usada, retorna null
             c++;
+            System.out.println("C: "+c);
             Pieza pSiguiente = ubicaciones.get(cont);
             a++;
+            System.out.println("A: "+a);
             pSiguiente.setUsada(true); 
             a++;
+            System.out.println("A: "+a);
             piezasSolucion.add(pSiguiente); //Agrega la pieza
             a++;
+            System.out.println("A: "+a);
             return pSiguiente;
             
         }
@@ -209,16 +231,21 @@ public class AvanceRapido {
         
         ArrayList<Pieza> sures  = pActual.getDict().get(sur); //Obtenemos los matches en el sur 
         a++;
+        System.out.println("A: "+a);
         for (Pieza sure : sures) {
             c++;
+            System.out.println("C: "+c);
             if(sure.getOeste() == numeroEste && !sure.isUsada()){ //Pregunta si encuentra una pieza que coincida
                 
                  Pieza pSiguiente = sure;  
                  a++;
+                 System.out.println("A: "+a);
                  sure.setUsada(true);
                  a++;
+                 System.out.println("A: "+a);
                  piezasSolucion.add(pSiguiente); //Agregar
                  a++;
+                 System.out.println("A: "+a);
                  return pSiguiente;
              }
              
@@ -232,14 +259,16 @@ public class AvanceRapido {
 
         pActual = piezasSolucion.get(indice-2);
         a++;
+        System.out.println("A: "+a);
         pActual.setUsada(true);
         a++;
+        System.out.println("A: "+a);
         //pActual.setPreviamenteUsada(true);
        // System.out.println("Pieza Eliminada: "+pActual);
         piezasSolucion.remove(indice-2); //La elimina de las soluciones
         
       
-       System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
+     //  System.out.println("Nuevo pActual: "+piezasSolucion.get(indice-3));
        return piezasSolucion.get(indice-3); //Retorna la pieza anterior.
         
     }
@@ -249,24 +278,24 @@ public class AvanceRapido {
             c++;
         if(piezasSolucion.size() == limite*limite){ 
             //comparacion
-           System.out.println("C: " + getC());
+         //  System.out.println("C: " + getC());
             return 1;}
         
         else{ 
             if(indice<=limite){ //Estamos en primera fila
                 c++;// comparacion
-               System.out.println("C: " + getC());
+              // System.out.println("C: " + getC());
                pActual =  buscaMatch(pActual, este);
                a++;// asignacion
-               System.out.println("A: " + getA());
-               System.out.println("------------------------------");
-               System.out.println("indice: "+indice);
-               System.out.println("Pactual: "+pActual);
+             //  System.out.println("A: " + getA());
+             //  System.out.println("------------------------------");
+             //  System.out.println("indice: "+indice);
+             //  System.out.println("Pactual: "+pActual);
                
               
                if(pActual!=null) {
                    c++;//comparacion
-                   System.out.println("C: " + getC());
+               //    System.out.println("C: " + getC());
                    armarAux(limite, pActual, null, indice+1);
                }
                
@@ -282,10 +311,10 @@ public class AvanceRapido {
                 System.out.println("A: " + getA());
                 pActual=buscaMatch(pActual, sur);
                 a++; //asignacion
-                  System.out.println("A: " + getA());
-                  System.out.println("------------------------------");
-                  System.out.println("indice: "+indice);
-                  System.out.println("Pactual: "+pActual);
+              //    System.out.println("A: " + getA());
+              //    System.out.println("------------------------------");
+              //    System.out.println("indice: "+indice);
+             //     System.out.println("Pactual: "+pActual);
                  if(pActual!=null){
                      c++;//comparacion 
                      System.out.println("C: " + getC());
@@ -304,10 +333,10 @@ public class AvanceRapido {
                 System.out.println("A: " + getA());
                 pActual = piezaCentral(pActual, numeroEste);
                  a++; //asignacion
-                System.out.println("A: " + getA());
-                System.out.println("------------------------------");
-                System.out.println("indice: "+indice);
-                System.out.println("Pactual: "+pActual);
+              //  System.out.println("A: " + getA());
+             //   System.out.println("------------------------------");
+             //   System.out.println("indice: "+indice);
+              //  System.out.println("Pactual: "+pActual);
                 if(pActual!=null){
                     c++; //comparacion
                      System.out.println("C: " + getC());

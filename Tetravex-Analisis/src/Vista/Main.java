@@ -119,10 +119,10 @@ public class Main {
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
         ArrayList<Pieza> temporalArmado;
-        int cantidadPiezas = 10*10;
-        int orden = 10;
+        int cantidadPiezas = 60*60;
+        int orden = 60;
        
-        llenarPuzzle(9, piezasArmadas, cantidadPiezas);
+        llenarPuzzle(15, piezasArmadas, cantidadPiezas);
         temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
         desordenar(piezasDesordenadas, piezasArmadas);
         System.out.println("Piezas armadas ");
