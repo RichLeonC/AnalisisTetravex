@@ -8,6 +8,7 @@ package Vista;
 
 import Modelo.Pieza;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 //Melissa Alguera Castillo
@@ -24,22 +25,31 @@ public class Main {
         return (posicion-1)%numero == 0;
     }
 
-    public static void llenarPuzzle(int limite, ArrayList<Pieza> piezasArmadas, int orden){
+    public static HashMap<Integer, ArrayList> llenarPuzzle(int orden, int poblacion){
+        ArrayList<Pieza> piezasArmadas = new ArrayList();
+        HashMap<Integer, ArrayList> dictRompecabezas = new HashMap();
+        int contador = 0;
         Random aleatorio = new Random();
         int numero;
         Pieza piezaActual;
-        for(int i = 0;i<orden;i++){ //Recorre la cantidad total de las piezas
-           piezaActual = new Pieza();
-           piezaActual.setNumPieza(i);
-            for(int j=0;j<4;j++){ //Recorre cada posicion de una pieza
-                  numero = aleatorio.nextInt(limite+1); 
-                  piezaActual.getPosiciones()[j] = numero;          
-               
-            }     
-            piezasArmadas.add(piezaActual);
+        
+        while(contador != poblacion){
+            for(int i = 0;i<orden;i++){ //Recorre la cantidad total de las piezas
+                piezaActual = new Pieza();
+                piezaActual.setNumPieza(i);
+                    for(int j=0;j<4;j++){ //Recorre cada posicion de una pieza
+                        numero = aleatorio.nextInt(9+1); 
+                        piezaActual.getPosiciones()[j] = numero;                         
+                    }     
+                piezasArmadas.add(piezaActual);
            
+            }
+            dictRompecabezas.put(contador, piezasArmadas);
+            piezasArmadas.clear();
+            contador++;
         }
-    
+            
+        return dictRompecabezas;
     }
 
     //Funcion principal en donde se hacen la llamada de los algoritmos
@@ -52,8 +62,8 @@ public class Main {
 
     public static void main(String[] args) {
        
-       
-       
+        System.out.println(llenarPuzzle(9, 30).get(0));
+        
        
     }
     
