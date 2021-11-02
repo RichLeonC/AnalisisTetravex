@@ -6,7 +6,7 @@
 package Vista;
 
 import Modelo.AvanceRapido;
-import Modelo.FuerzaBruta;
+
 import Modelo.Pieza;
 import java.util.ArrayList;
 import java.util.Random;
@@ -122,21 +122,7 @@ public class Main {
         int cantidadPiezas = 3*3;
         int orden = 3;
        
-        llenarPuzzle(9, piezasArmadas, cantidadPiezas);
-        temporalArmado = (ArrayList<Pieza>) piezasArmadas.clone();
-        desordenar(piezasDesordenadas, piezasArmadas);
-        System.out.println("Piezas Desordenadas ");
-        System.out.println(piezasDesordenadas);
-
-        FuerzaBruta.comparar(piezasDesordenadas, temporalArmado);
-     
-        AvanceRapido rapido = new AvanceRapido(piezasDesordenadas);
-   
-        rapido.armarCola(orden, temporalArmado);
-      
-        System.out.println("---------------------------------------------------------");
-        System.out.println("Avance Rápido: "+"\n"+rapido.piezasSolucion);
-        System.out.println("Asignaciones: "+rapido.getA() + ", Comparaciones:" +rapido.getC());
+        
      
 
     }
@@ -144,14 +130,7 @@ public class Main {
     public static void main(String[] args) {
        
        
-        long startTime = System.nanoTime();
-         principal();
-       long endTime = System.nanoTime();
        
-       long timeElapsed = endTime- startTime;
-        
-        
-        System.out.println("Tiempo de ejecución en milisegundos: " + timeElapsed / 1000000);
        
     }
     
