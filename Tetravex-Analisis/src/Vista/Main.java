@@ -45,7 +45,7 @@ public class Main {
            
             }
             dictRompecabezas.put(contador, piezasArmadas);
-            piezasArmadas.clear();
+            piezasArmadas = new ArrayList();
             contador++;
         }
             
@@ -62,7 +62,7 @@ public class Main {
 
     public static void main(String[] args) {
        
-        System.out.println(llenarPuzzle(9, 30).get(0));
+        System.out.println(llenarPuzzle(9, 30));
         
        
     }
