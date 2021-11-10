@@ -6,10 +6,12 @@
 package Vista;
 
 
+import Modelo.AlgoritmoGenetico;
 import Modelo.Pieza;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
 
 //Melissa Alguera Castillo
 //Adrian Herrera Segura AKA Atloide
@@ -61,8 +63,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-       
-        System.out.println(llenarPuzzle(9, 30));
+        
+        AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
+        
+        HashMap<Integer,Integer> matches = genetico.funcionFitness(poblacion, 3); ;
+        System.out.println(poblacion);
+        System.out.println("-----------------------------------------------");
+        System.out.println(matches);
         
        
     }
