@@ -28,17 +28,25 @@ public class AlgoritmoGenetico {
         
         for (int i=0; i<poblaciones.size() ; i++){
             ArrayList<Pieza> tetravex= poblaciones.get(i);
-            System.out.println(tetravex);
+           
         for (int j=0; j<tetravex.size(); j++){
             Pieza piezaActual = tetravex.get(j);
-
-            if (j<limite-1){
-                Pieza siguientePieza = tetravex.get(j++);
+            System.out.println(j);
+            if (!isLastLine(limite,j)){
+                Pieza siguientePieza = tetravex.get(j+1);
                 Pieza piezaAbajo =tetravex.get(j+limite);
-                if (piezaActual.getEste() == siguientePieza.getOeste())
-                    matches++;
-                if (piezaActual.getSur()== piezaAbajo.getNorte())
+                
+                 if (isUltimo(limite, j)){
+                    if (piezaActual.getSur()== piezaAbajo.getNorte())
+                     matches++;
+                 }  
+                 else{
+                    if (piezaActual.getEste() == siguientePieza.getOeste())
+                         matches++;
+                    if (piezaActual.getSur()== piezaAbajo.getNorte())
                         matches++;
+                 }
+                
             }
   
            else if(isLastLine(limite,j)){
@@ -48,17 +56,13 @@ public class AlgoritmoGenetico {
                 }
                 
                 else{
-                      Pieza siguientePieza = tetravex.get(j++);
+                      Pieza siguientePieza = tetravex.get(j+1);
                      if (piezaActual.getEste() == siguientePieza.getOeste())
                         matches++;
                         }
             
             }
-            else if (isUltimo(limite, j)){
-              Pieza piezaAbajo =tetravex.get(j+limite);
-                if (piezaActual.getSur()== piezaAbajo.getNorte())
-                     matches++;
-            }  
+          
         }
      }
         
