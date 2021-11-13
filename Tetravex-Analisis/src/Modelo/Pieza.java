@@ -16,33 +16,20 @@ public class Pieza {
    private Integer []posiciones = new Integer[4];
    private int numPieza;
    private boolean usada;
-<<<<<<< Updated upstream
-   private boolean usadaInicial;
-=======
+
    private byte bin;
->>>>>>> Stashed changes
+
+ 
+
    
 
     public Pieza() {
         
         usada = false;
-        usadaInicial = false;
+    
         
     }
 
-    public Pieza(int norte,int este, int sur, int oeste, int numPieza) {
-        posiciones[0]  = norte;
-        posiciones[1] = este;
-        posiciones[2] = sur;
-        posiciones[3] = oeste;
-        this.numPieza = numPieza;
-    }
-
-    public Pieza(int numPieza) {
-        this.numPieza = numPieza;
-    }
-    
-    
 
     public Integer[] getPosiciones() {
         return posiciones;
@@ -100,28 +87,24 @@ public class Pieza {
         this.usada = usada;
     }
 
-<<<<<<< Updated upstream
-    public boolean isUsadaInicial() {
-        return usadaInicial;
-    }
 
-    public void setUsadaInicial(boolean usadaInicial) {
-        this.usadaInicial = usadaInicial;
-=======
+
     public byte getBin() {
         return bin;
     }
 
     public void setBin(byte bin) {
         this.bin = bin;
->>>>>>> Stashed changes
+
     }
     
     
 
+
     @Override
     public String toString() {
-        return "Pieza{" + "posiciones={" + getNorte() +","+getEste()+","+getSur()+","+getOeste()+"}"+ ", numPieza=" + numPieza + '}';
+        return "Pieza{" + "posiciones={" + getNorte() +","+getEste()+","+getSur()+","+getOeste()+"}"
+                + ", numPieza=" + numPieza + '}'+"\n";
     }
         
     
