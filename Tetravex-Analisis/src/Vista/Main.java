@@ -109,6 +109,7 @@ public class Main {
     }
     
     public static void principal(){
+<<<<<<< Updated upstream
         ArrayList<Pieza> piezasArmadas = new ArrayList();
         ArrayList<Pieza> piezasDesordenadas = new ArrayList();
         ArrayList<Pieza> temporalArmado;
@@ -133,12 +134,30 @@ public class Main {
        
         rapido.armarCola(3, temporalArmado);
         //rapido.matchesPiezas();
+=======
+      AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
+        
+        //HashMap<Integer,Integer> matches = genetico.funcionFitness(poblacion, 3); ;
+       // System.out.println(poblacion);
+        //System.out.println("-----------------------------------------------");
+        //System.out.println(matches);
+        
+        genetico.padreBinario(poblacion.get(0));
+        ArrayList<Pieza> padre = poblacion.get(0);
+        System.out.println(padre.get(0).getBin());
+     
+
+>>>>>>> Stashed changes
     }
 
     public static void main(String[] args) {
         principal();
+<<<<<<< Updated upstream
+=======
         
-       
+>>>>>>> Stashed changes
+        
     }
     
 }
