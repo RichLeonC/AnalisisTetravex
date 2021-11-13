@@ -82,4 +82,8 @@ public class AlgoritmoGenetico {
         
     }
     
+    public HashMap<Integer,ArrayList> cruceAnd(HashMap<Integer,Integer> matches,HashMap<Integer,ArrayList> poblacionesIniciales,int totalG){
+        ArrayList<Integer> values = (ArrayList<Integer>) matches.values(); 
+    }
+    
 }

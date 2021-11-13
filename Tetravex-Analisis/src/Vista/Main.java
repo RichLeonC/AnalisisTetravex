@@ -58,7 +58,7 @@ public class Main {
     public static void principal(){
 
       AlgoritmoGenetico genetico = new AlgoritmoGenetico();
-    HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
+       HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
         
         //HashMap<Integer,Integer> matches = genetico.funcionFitness(poblacion, 3); ;
        // System.out.println(poblacion);
