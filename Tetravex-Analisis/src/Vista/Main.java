@@ -59,15 +59,19 @@ public class Main {
 
       AlgoritmoGenetico genetico = new AlgoritmoGenetico();
        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
-        
+         HashMap<Integer, ArrayList> generacionesAnd;
         //HashMap<Integer,Integer> matches = genetico.funcionFitness(poblacion, 3); ;
        // System.out.println(poblacion);
         //System.out.println("-----------------------------------------------");
         //System.out.println(matches);
+
+   
+         
+        generacionesAnd = genetico.cruceAnd(genetico.funcionFitness(poblacion, 3),poblacion, 50);
         
-        genetico.padreBinario(poblacion.get(0));
-        ArrayList<Pieza> padre = poblacion.get(0);
-        System.out.println(padre.get(0).getBin());
+        System.out.println("Inical: "+genetico.funcionFitness(poblacion, 3));
+        System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd, 3));
+        
      
 
     }
