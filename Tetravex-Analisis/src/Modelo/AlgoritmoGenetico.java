@@ -124,59 +124,86 @@ public class AlgoritmoGenetico {
     }
     
     public HashMap<Integer, ArrayList> ShuffleCrossover(HashMap<Integer, ArrayList> poblaciones, int cPoblaciones, int cruces){
-        HashMap<Integer, Integer> cantidadMatches = funcionFitness(poblaciones, 3);
-        HashMap<Integer, Integer> matchesOrdenados = ordenarHashMap(cantidadMatches);
-        HashMap<Integer, ArrayList> crucesExitosos = new HashMap();
-        ArrayList<Pieza> padreUno = new ArrayList();
-        ArrayList<Pieza> padreDos = new ArrayList();
-        ArrayList<Pieza> hijoUno = new ArrayList();
-        ArrayList<Pieza> hijoDos = new ArrayList();
-        ArrayList<Pieza> hijoUnoClone = new ArrayList();
-        ArrayList<Pieza> hijoDosClone = new ArrayList();
-        int breakPoint = (int) (Math.random() * (9 + 1));
-        int contadorCruces = 0;
-        int contadorPoblaciones = 1;
+        HashMap<Integer, Integer> cantidadMatches = funcionFitness(poblaciones, 3); //Guarda la cantidad de matches de los rompecabezas padres 
+        HashMap<Integer, Integer> matchesOrdenados = ordenarHashMap(cantidadMatches); //Ordena la cantidad de matches de mayor a menor
+        HashMap<Integer, ArrayList> crucesExitosos = new HashMap(); //HashMap que guardará los cruces hijos
+        ArrayList<Pieza> padreUno = new ArrayList(); //Array padre uno
+        ArrayList<Pieza> padreDos = new ArrayList(); //Array padre dos
+        ArrayList<Pieza> hijoUno = new ArrayList(); //Array hijo uno
+        ArrayList<Pieza> hijoDos = new ArrayList(); //Array hijo dos
+        ArrayList<Pieza> hijoUnoClone = new ArrayList(); //Clon del array hijo uno
+        ArrayList<Pieza> hijoDosClone = new ArrayList(); //Clon del array hijo dos
+        ArrayList<Integer>  values = new ArrayList(matchesOrdenados.values()); //Array con los matches ordenados
+        int breakPoint = (int) (Math.random() * (9 + 1)); //Punto de quiebre para el cruce
+        int contadorCruces = 0; //Contador de la cantidad de cruces realizados
+        int contadorPoblaciones = 1; //Contador de poblaciones cruzadas
+        int comparaciones = 0;
+        int asignaciones = 0;
         
-        Object[] keys = matchesOrdenados.keySet().toArray();
+        values.sort(Collections.reverseOrder()); //Ordena los matches de mayor a menor
+        asignaciones ++;
+        System.out.println("Tipo de cruce: Cruce Shuffle");
         
-        padreUno = poblaciones.get(keys[0]);
-        Collections.shuffle(padreUno);
+        Object[] keys = matchesOrdenados.keySet().toArray(); //Array con las llaves ordenadas de las poblaciones ordenadas
+        asignaciones ++;
         
-        while (contadorCruces < cruces){
+        padreUno = poblaciones.get(keys[0]); //Al padre uno se le asigna la mejor poblacion
+        asignaciones ++;
+        Collections.shuffle(padreUno); //Se desordena la poblacion del primer padre
+        
+        while (contadorCruces < cruces){ //Bucle que se detiene hasta que se hayan realizado todos los cruces solicitados
+            comparaciones ++;
+            System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
             
-            if(contadorPoblaciones <= cPoblaciones){
-                padreUno = poblaciones.get(keys[1]);
+            if(contadorPoblaciones == cPoblaciones){ //Si ya no hay más cruces con la mejor poblacion, se cambia a la segunda mejor
+                padreUno = poblaciones.get(keys[1]); //Se cambia el valor del primer padre
                 contadorPoblaciones = 3;
+                System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(1));
+                
+                asignaciones += 2;
+                comparaciones ++;
             }
             
-            padreDos = poblaciones.get(keys[contadorPoblaciones]);
-            Collections.shuffle(padreDos);
-            for (int i = 0; i < breakPoint; i++) {
-                hijoUno.add(padreUno.get(i));
-                hijoDos.add(padreDos.get(i));
+            padreDos = poblaciones.get(keys[contadorPoblaciones]); //Se asigna el segundo padre
+            asignaciones ++;
+            Collections.shuffle(padreDos); //Se desordena la poblacion del segundo padre
+            System.out.println("Padre 2: " + padreDos + "Puntuacion: " + values.get(contadorPoblaciones));
+            for (int i = 0; i < breakPoint; i++) { //Se crean los hijos con la informacion de un padre hasta el punto de cruce
+                hijoUno.add(padreUno.get(i)); //Se añade informacion al hijo uno
+                hijoDos.add(padreDos.get(i)); //Se añade informacion al hijo dos
+                comparaciones ++;
+                asignaciones ++;
             }
-            for (int i = breakPoint + 1; i < 9; i++) {
-                hijoUno.add(padreDos.get(i));
-                hijoDos.add(padreUno.get(i));
+            for (int i = breakPoint + 1; i < 9; i++) { //Cuando se pasa el punto de cruce, se cambia a la informacion del segundo padre
+                hijoUno.add(padreDos.get(i)); //Se añade informacion al hijo uno
+                hijoDos.add(padreUno.get(i)); //Se añade informacion al hijo dos
+                comparaciones ++;
+                asignaciones ++;
             }
             
-            hijoUnoClone = (ArrayList<Pieza>) hijoUno.clone();
-            hijoDosClone = (ArrayList<Pieza>) hijoDos.clone();
+            hijoUnoClone = (ArrayList<Pieza>) hijoUno.clone(); //Se clona al hijo uno para no tener poblemas de dirección de memoria
+            asignaciones ++;
+            System.out.println("Hijo 1: " + hijoUnoClone + "puntuacion: " + puntacionIndividual(hijoUnoClone));
             
-            crucesExitosos.put(contadorCruces, hijoUnoClone);
+            hijoDosClone = (ArrayList<Pieza>) hijoDos.clone(); //Se clona al hijo dos para no tener poblemas de dirección de memoria
+            asignaciones ++;
+            System.out.println("Hijo 2: " + hijoDosClone + "puntuacion: " + puntacionIndividual(hijoDosClone));
+            
+            crucesExitosos.put(contadorCruces, hijoUnoClone); //Se añade el hijo uno a la hash de cruces exitosos
             contadorCruces ++;
             
-            crucesExitosos.put(contadorCruces, hijoDosClone);
+            crucesExitosos.put(contadorCruces, hijoDosClone); //Se añade el hijo dos a la hash de cruces exitosos
             contadorCruces++;
             
-            hijoUno.clear();
-            hijoDos.clear();
+            hijoUno.clear(); //Se limpia el hijo uno para seguir con el proceso
+            hijoDos.clear(); //Se limpia el hijo dos para seguir con el proceso
             
             contadorPoblaciones++;
         }
         
         
-        
+        System.out.println("Asignaciones: " + asignaciones + ", Comparaciones: " + comparaciones);
+        System.out.println("Cantidad total de instrucciones: " + (asignaciones + comparaciones));
         return crucesExitosos;
     }
 

@@ -67,9 +67,6 @@ public class Main {
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
         HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
         HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblacion, 30, 50);
-        System.out.println(poblacion);
-        System.out.println("-----------------------------------------------");
-        System.out.println(crucesExitosos);
         
        
     }
