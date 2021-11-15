@@ -53,26 +53,38 @@ public class Main {
             
         return dictRompecabezas;
     }
+    
+    public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblacion,AlgoritmoGenetico genetico){
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println("Cruce por operador logico AND");
+         System.out.println("3X3");
+         HashMap<Integer, ArrayList> generacionesAnd3x3;
+         generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 3),poblacion, 50);   
+         System.out.println("5X5");
+         poblacion = llenarPuzzle(25,60);
+         HashMap<Integer, ArrayList> generacionesAnd5x5;
+         generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 5),poblacion, 60);  
+        
+        System.out.println("7X7");
+        poblacion = llenarPuzzle(49,90);
+        HashMap<Integer, ArrayList> generacionesAnd7x7;
+        generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 7),poblacion, 70);  
+        // System.out.println("Inicial: "+genetico.funcionFitness(poblacion, 3));
+       // System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd, 3));
+    }
 
     //Funcion principal en donde se hacen la llamada de los algoritmos
     public static void principal(){
 
       AlgoritmoGenetico genetico = new AlgoritmoGenetico();
        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
-         HashMap<Integer, ArrayList> generacionesAnd;
+         
         //HashMap<Integer,Integer> matches = genetico.funcionFitness(poblacion, 3); ;
        // System.out.println(poblacion);
         //System.out.println("-----------------------------------------------");
         //System.out.println(matches);
-
+        geneticoCruceAnd(poblacion, genetico);
    
-         
-        generacionesAnd = genetico.cruceAnd(genetico.funcionFitness(poblacion, 3),poblacion, 50);
-        
-        System.out.println("Inical: "+genetico.funcionFitness(poblacion, 3));
-        System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd, 3));
-        
-     
 
     }
 
