@@ -12,22 +12,19 @@ import java.util.HashMap;
  *
  * @author richa
  */
+//Total memoria Pieza 176
 public class Pieza {
-   private Integer []posiciones = new Integer[4];
-   private int numPieza;
-   private boolean usada;
-
-   private byte bin;
+   private Integer []posiciones = new Integer[4]; //32*4
+   private int numPieza; //32
+   private boolean usada;//8
+   private byte bin;  //8
 
  
 
    
 
     public Pieza() {
-        
-        usada = false;
-    
-        
+        usada = false;       
     }
 
 
