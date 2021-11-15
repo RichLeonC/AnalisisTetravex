@@ -12,25 +12,19 @@ import java.util.HashMap;
  *
  * @author richa
  */
+//Total memoria Pieza 176
 public class Pieza {
-   private Integer []posiciones = new Integer[4];
-   private int numPieza;
-   private HashMap<Integer, ArrayList<Pieza>> dictMatches;
-   private int probabilidad;
-   private boolean usada;
+   private Integer []posiciones = new Integer[4]; //32*4
+   private int numPieza; //32
+   private boolean usada;//8
+   private byte bin;  //8
+
  
+
    
 
     public Pieza() {
-        dictMatches = new HashMap();
-        dictMatches.put(0, new ArrayList()); // (0,1), (0,2), (0,3)
-        dictMatches.put(1, new ArrayList());
-        dictMatches.put(2, new ArrayList());
-        dictMatches.put(3, new ArrayList());
-        probabilidad = 0;
-        usada = false;
-    
-        
+        usada = false;       
     }
 
 
@@ -50,13 +44,6 @@ public class Pieza {
         this.numPieza = numPieza;
     }
 
-    public HashMap<Integer,ArrayList<Pieza>> getDict() {
-        return dictMatches;
-    }
-
-    public void setDict(HashMap<Integer, ArrayList<Pieza>> dict) {
-        this.dictMatches = dict;
-    }
     
     public int getNorte(){
         return posiciones[0];
@@ -87,13 +74,7 @@ public class Pieza {
         posiciones[3] = oeste;
     }
 
-    public int getProbabilidad() {
-        return probabilidad;
-    }
-
-    public void setProbabilidad(int probabilidad) {
-        this.probabilidad = probabilidad;
-    }
+ 
 
     public boolean isUsada() {
         return usada;
@@ -102,6 +83,20 @@ public class Pieza {
     public void setUsada(boolean usada) {
         this.usada = usada;
     }
+
+
+
+    public byte getBin() {
+        return bin;
+    }
+
+    public void setBin(byte bin) {
+        this.bin = bin;
+
+    }
+    
+    
+
 
     @Override
     public String toString() {
