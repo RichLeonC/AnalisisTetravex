@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
 
 public class AlgoritmoGenetico {
@@ -88,44 +90,7 @@ public class AlgoritmoGenetico {
         return cantidadMatches;
     }
     
-    public int puntacionIndividual(ArrayList<Pieza> tetravex){
-        int limite = (int) Math.sqrt(tetravex.size());
-        int matches = 0;
-        for (int j=0; j<tetravex.size(); j++){
-            Pieza piezaActual = tetravex.get(j);
-            if (!isLastLine(limite,j)){
-                Pieza siguientePieza = tetravex.get(j+1);
-                Pieza piezaAbajo =tetravex.get(j+limite);
-                
-                 if (isUltimo(limite, j)){
-                    if (piezaActual.getSur()== piezaAbajo.getNorte())
-                     matches++;
-                 }  
-                 else{
-                    if (piezaActual.getEste() == siguientePieza.getOeste())
-                         matches++;
-                    if (piezaActual.getSur()== piezaAbajo.getNorte())
-                        matches++;
-                 }
-                
-            }
-  
-           else if(isLastLine(limite,j)){
-                if ((limite*limite)-1== j){
-                    return matches;
-                }
-                
-                else{
-                      Pieza siguientePieza = tetravex.get(j+1);
-                     if (piezaActual.getEste() == siguientePieza.getOeste())
-                        matches++;
-                        }
-            
-            }
-          
-        }
-        return matches;
-    }
+
     
     public HashMap<Integer, ArrayList> ShuffleCrossover(HashMap<Integer, ArrayList> poblaciones, int cPoblaciones, int cruces){
         HashMap<Integer, Integer> cantidadMatches = funcionFitness(poblaciones, 3); //Guarda la cantidad de matches de los rompecabezas padres 
