@@ -18,7 +18,7 @@ import java.util.Random;
 //Richard Leon Chinchilla
 
 //Fecha inicio: 12 de Setiembre
-//Fecha ultima modificacion: 01 de Octubre
+//Fecha ultima modificacion: 13 de Noviembre
 
 
 public class Main {
@@ -66,11 +66,10 @@ public class Main {
         
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
         HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
-        
-        HashMap<Integer,Integer> matches = genetico.funcionFitness(poblacion, 3); ;
+        HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblacion, 30, 50);
         System.out.println(poblacion);
         System.out.println("-----------------------------------------------");
-        System.out.println(matches);
+        System.out.println(crucesExitosos);
         
        
     }
