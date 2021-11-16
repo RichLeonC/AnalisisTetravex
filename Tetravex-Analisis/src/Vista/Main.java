@@ -1,5 +1,5 @@
 
-=======
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -154,14 +154,14 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
     public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
         HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
         System.out.println("-------------------------------------------------------------------------------");
-       /* System.out.println("Cruce por operador logico AND");
+        System.out.println("Cruce por operador logico AND");
         System.out.println("3X3");
         HashMap<Integer, ArrayList> generacionesAnd3x3;
          generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
          System.out.println("5X5");
          HashMap<Integer, ArrayList> generacionesAnd5x5;
          generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblaciones2, 5),poblaciones2, 60);  
-        */
+         
         System.out.println("7X7");
         HashMap<Integer, ArrayList> generacionesAnd7x7;
         generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblaciones3, 7),poblaciones3, 70);  
@@ -178,6 +178,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
 
        geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
+       PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
    
 
     }

@@ -92,8 +92,8 @@ public class AlgoritmoGenetico {
     
 
     
-    public HashMap<Integer, ArrayList> ShuffleCrossover(HashMap<Integer, ArrayList> poblaciones, int cPoblaciones, int cruces){
-        HashMap<Integer, Integer> cantidadMatches = funcionFitness(poblaciones, 3); //Guarda la cantidad de matches de los rompecabezas padres 
+    public HashMap<Integer, ArrayList> ShuffleCrossover(HashMap<Integer, ArrayList> poblaciones, int cPoblaciones, int cruces,int dimension){
+        HashMap<Integer, Integer> cantidadMatches = funcionFitness(poblaciones, dimension); //Guarda la cantidad de matches de los rompecabezas padres 
         HashMap<Integer, Integer> matchesOrdenados = ordenarHashMap(cantidadMatches); //Ordena la cantidad de matches de mayor a menor
         HashMap<Integer, ArrayList> crucesExitosos = new HashMap(); //HashMap que guardará los cruces hijos
         ArrayList<Pieza> padreUno = new ArrayList(); //Array padre uno
@@ -103,7 +103,7 @@ public class AlgoritmoGenetico {
         ArrayList<Pieza> hijoUnoClone = new ArrayList(); //Clon del array hijo uno
         ArrayList<Pieza> hijoDosClone = new ArrayList(); //Clon del array hijo dos
         ArrayList<Integer>  values = new ArrayList(matchesOrdenados.values()); //Array con los matches ordenados
-        int breakPoint = (int) (Math.random() * (9 + 1)); //Punto de quiebre para el cruce
+        
         int contadorCruces = 0; //Contador de la cantidad de cruces realizados
         int contadorPoblaciones = 1; //Contador de poblaciones cruzadas
         int comparaciones = 0;
@@ -121,6 +121,7 @@ public class AlgoritmoGenetico {
         Collections.shuffle(padreUno); //Se desordena la poblacion del primer padre
         
         while (contadorCruces < cruces){ //Bucle que se detiene hasta que se hayan realizado todos los cruces solicitados
+            int breakPoint = (int) (Math.random() * (dimension*dimension + 1)); //Punto de quiebre para el cruce
             comparaciones ++;
             System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
             
@@ -143,7 +144,7 @@ public class AlgoritmoGenetico {
                 comparaciones ++;
                 asignaciones ++;
             }
-            for (int i = breakPoint + 1; i < 9; i++) { //Cuando se pasa el punto de cruce, se cambia a la informacion del segundo padre
+            for (int i = breakPoint + 1; i < dimension*dimension; i++) { //Cuando se pasa el punto de cruce, se cambia a la informacion del segundo padre
                 hijoUno.add(padreDos.get(i)); //Se añade informacion al hijo uno
                 hijoDos.add(padreUno.get(i)); //Se añade informacion al hijo dos
                 comparaciones ++;
