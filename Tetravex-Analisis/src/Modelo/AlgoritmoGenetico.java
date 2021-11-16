@@ -93,8 +93,11 @@ public class AlgoritmoGenetico {
 
     
     public HashMap<Integer, ArrayList> ShuffleCrossover(HashMap<Integer, ArrayList> poblaciones, int cPoblaciones, int cruces,int dimension){
+        int memoriaUtilizada = 0;
         HashMap<Integer, Integer> cantidadMatches = funcionFitness(poblaciones, dimension); //Guarda la cantidad de matches de los rompecabezas padres 
+        memoriaUtilizada = cantidadMatches.size()*32*2;
         HashMap<Integer, Integer> matchesOrdenados = ordenarHashMap(cantidadMatches); //Ordena la cantidad de matches de mayor a menor
+        memoriaUtilizada = matchesOrdenados.size()*32*2;
         HashMap<Integer, ArrayList> crucesExitosos = new HashMap(); //HashMap que guardará los cruces hijos
         ArrayList<Pieza> padreUno = new ArrayList(); //Array padre uno
         ArrayList<Pieza> padreDos = new ArrayList(); //Array padre dos
@@ -142,13 +145,13 @@ public class AlgoritmoGenetico {
                 hijoUno.add(padreUno.get(i)); //Se añade informacion al hijo uno
                 hijoDos.add(padreDos.get(i)); //Se añade informacion al hijo dos
                 comparaciones ++;
-                asignaciones ++;
+                asignaciones +=3;
             }
-            for (int i = breakPoint + 1; i < dimension*dimension; i++) { //Cuando se pasa el punto de cruce, se cambia a la informacion del segundo padre
+            for (int i = breakPoint; i < dimension*dimension; i++) { //Cuando se pasa el punto de cruce, se cambia a la informacion del segundo padre
                 hijoUno.add(padreDos.get(i)); //Se añade informacion al hijo uno
                 hijoDos.add(padreUno.get(i)); //Se añade informacion al hijo dos
                 comparaciones ++;
-                asignaciones ++;
+                asignaciones +=3;
             }
             
             hijoUnoClone = (ArrayList<Pieza>) hijoUno.clone(); //Se clona al hijo uno para no tener poblemas de dirección de memoria
@@ -171,8 +174,10 @@ public class AlgoritmoGenetico {
             contadorPoblaciones++;
         }
         
+        //memoriaUtilizada = (crucesExitosos.size() * 32) + crucesExitosos.get(0).size() * 176
+        
         System.out.println("--------------------TOP 5 HIJOS--------------------------------------");
-        //topHijos(crucesExitosos);
+        topHijos(crucesExitosos);
         System.out.println("---------------------------------------------------------------------");
         System.out.println("Asignaciones: " + asignaciones + ", Comparaciones: " + comparaciones);
         System.out.println("Cantidad total de instrucciones: " + (asignaciones + comparaciones));
@@ -377,7 +382,7 @@ public class AlgoritmoGenetico {
     
     public void topHijos( HashMap<Integer,ArrayList> generaciones){
         int limite = (int) Math.sqrt(generaciones.get(0).size());
-
+        System.out.println("generaciones: "+generaciones.get(0).size());
         System.out.println("Limite: "+limite);
         HashMap<Integer,Integer> puntuaciones = funcionFitness(generaciones, limite);
         ArrayList<Integer>  values = new ArrayList(puntuaciones.values()); 
