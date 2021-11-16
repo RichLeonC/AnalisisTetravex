@@ -1,11 +1,11 @@
-<<<<<<< HEAD
+
 =======
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
->>>>>>> parent of cf2541f (Merge branch 'Proyecto2' of https://github.com/RichLeonC/AnalisisTetravex into Proyecto2)
+
 package Vista;
 
 import Modelo.AlgoritmoGenetico;
@@ -128,8 +128,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("SizeP: "+poblacionesH.get(0).size());
         return poblacionesH;
     }
-<<<<<<< HEAD
-    
+
     public static void PrintShuffleCrossover(HashMap<Integer, ArrayList> poblaciones1, HashMap<Integer, ArrayList> poblaciones2, HashMap<Integer, ArrayList> poblaciones3){
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
         
@@ -151,20 +150,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         
         crucesExitosos = genetico.ShuffleCrossover(poblaciones3, 90, 70, 7); 
     }
-    
-    //Funcion principal en donde se hacen la llamada de los algoritmos
-    public static void principal(){
-
-        AlgoritmoGenetico genetico = new AlgoritmoGenetico();
-        HashMap<Integer, ArrayList> poblaciones1 = desordenar(9,30);
-        HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
-        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
-        PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
-    }
-
-    public static void main(String[] args) {
-        
-=======
+ 
     public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
         HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
         System.out.println("-------------------------------------------------------------------------------");
@@ -197,7 +183,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
     }
 
     public static void main(String[] args) {
->>>>>>> parent of cf2541f (Merge branch 'Proyecto2' of https://github.com/RichLeonC/AnalisisTetravex into Proyecto2)
+
         principal();
 
 

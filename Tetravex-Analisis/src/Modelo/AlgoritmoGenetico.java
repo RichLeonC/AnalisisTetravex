@@ -388,6 +388,93 @@ public class AlgoritmoGenetico {
             }
         }
     }
+    
+    
+    
+    // algortimo de cruce kpoint , 
+  
+  public HashMap<Integer, ArrayList> kPoint (HashMap<Integer,Integer> cantidadMatches, HashMap<Integer, ArrayList> poblacion, int hijosP, int limite){
+      HashMap<Integer, ArrayList> hijos = new HashMap();// hijos producidos por los cruces y su key
+      ArrayList<Pieza> combinacion = new ArrayList();// tetravex hijo 
+      Object[] keys = cantidadMatches.keySet().toArray();// llaves de cantidadMatches
+      
+      
+      Random cantidadCruces = new Random();// cantidad de matches que va a realizar la solucion local 
+      int numero = cantidadCruces.nextInt(limite+1)+2;
+   //   System.out.println("numero :" + numero);
+      int cantidadSeparacion = (limite*limite)/numero;// cada cuanto va a haber una separación
+     // System.out.println("cantidad por separacion :" + cantidadSeparacion);
+      boolean cambio= true;// usar el primero o  segundo  padre
+      int cantiC =0; //cantidad antes de cambiar
+      int contaP1  = 0; // contador de uso de padres 
+      int keyHijo= 0; // keys para los hijos
+      int contaP2 =1;
+      int aux =1;
+      
+      ArrayList<Pieza> padre1 = poblacion.get(keys[contaP1]);
+      ArrayList<Pieza> padre2 = poblacion.get(keys[contaP2]);
+    //  System.out.println("Primer padre1: " + padre1);
+   //   System.out.println("Primer padre2: " + padre2);
+      
+      while (hijosP  > keyHijo){  
+          
+          for (int m=0 ; m<(limite*limite); m++){
+              if((cambio == true) && (cantiC < (cantidadSeparacion-1)) ){
+                  combinacion.add(padre1.get(m));
+                  cantiC++;
+                    
+              }
+              else if ((cambio == false) && (cantiC < (cantidadSeparacion-1)) ){
+                  combinacion.add(padre2.get(m));
+                  cantiC++; 
+              }
+              
+              else{
+                   if((cambio == true))combinacion.add(padre1.get(m));
+                   else if ((cambio == false) )combinacion.add(padre2.get(m));
+     
+                   cantiC=0;
+                   cambio= !cambio;
+                 
+              }
+          }
+          
+          //  System.out.println("-----------------------------------------------");
+          //  System.out.println("combinacion de padres");
+         //   System.out.println(combinacion);
+         //   System.out.println("-----------------------------------------------");
+          
+            
+            contaP2++;
+            if(contaP2< poblacion.size()){
+              //  System.out.println(contaP2);
+                padre2 =poblacion.get(keys[contaP2]);
+             //   System.out.println("solo cambio de padre2");
+              //  System.out.println("padre2: " + padre2);
+            }
+            
+            if (contaP2 >= poblacion.size()){
+                contaP1++;
+             //   System.out.println(contaP1);
+                padre1 = poblacion.get(keys[contaP1]);
+                aux++;
+                contaP2 = aux;
+                padre2 = poblacion.get(keys[contaP2]);
+             //     System.out.println("solo cambio de ambos");
+            //      System.out.println("padre1: " + padre1);
+            //      System.out.println("padre2: " + padre2);
+       
+            }
+ 
+           
+            hijos.put(keyHijo, combinacion);
+            keyHijo++;
+            combinacion = new ArrayList();
+      }
+      
+      return hijos;
+      
+}
   
     
 }
