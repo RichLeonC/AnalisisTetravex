@@ -60,7 +60,7 @@ public class Main {
          System.out.println("3X3");
          HashMap<Integer, ArrayList> generacionesAnd3x3;
          generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 3),poblacion, 50);   
-         System.out.println("5X5");
+       /*  System.out.println("5X5");
          poblacion = llenarPuzzle(25,60);
          HashMap<Integer, ArrayList> generacionesAnd5x5;
          generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 5),poblacion, 60);  
@@ -68,9 +68,9 @@ public class Main {
         System.out.println("7X7");
         poblacion = llenarPuzzle(49,90);
         HashMap<Integer, ArrayList> generacionesAnd7x7;
-        generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 7),poblacion, 70);  
+        generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 7),poblacion, 70);  */
         // System.out.println("Inicial: "+genetico.funcionFitness(poblacion, 3));
-       // System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd, 3));
+        System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd3x3, 3));
     }
 
     //Funcion principal en donde se hacen la llamada de los algoritmos
@@ -89,6 +89,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
+<<<<<<< Updated upstream
+=======
+        
+      //  AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+     //   HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
+     //   HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblacion, 30, 50);
+  
+>>>>>>> Stashed changes
         principal();
 
 
