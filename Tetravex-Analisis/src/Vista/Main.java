@@ -1,13 +1,10 @@
-
 package Vista;
-
 
 import Modelo.AlgoritmoGenetico;
 import Modelo.Pieza;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
 
 //Melissa Alguera Castillo
 //Adrian Herrera Segura
@@ -123,66 +120,41 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("SizeP: "+poblacionesH.get(0).size());
         return poblacionesH;
     }
-    public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
-        HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
-        System.out.println("-------------------------------------------------------------------------------");
-       /* System.out.println("Cruce por operador logico AND");
-        System.out.println("3X3");
-        HashMap<Integer, ArrayList> generacionesAnd3x3;
-         generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
-         System.out.println("5X5");
-         HashMap<Integer, ArrayList> generacionesAnd5x5;
-         generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblaciones2, 5),poblaciones2, 60);  
-        */
-        System.out.println("7X7");
-        HashMap<Integer, ArrayList> generacionesAnd7x7;
-        generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 7),poblacion, 70);  
-        generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblaciones3, 7),poblaciones3, 70);  
-        // System.out.println("Inicial: "+genetico.funcionFitness(poblaciones3, 3));
-         System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd7x7, 7));
-    }
     
-    public static void PrintShuffleCrossover(){
+    public static void PrintShuffleCrossover(HashMap<Integer, ArrayList> poblaciones1, HashMap<Integer, ArrayList> poblaciones2, HashMap<Integer, ArrayList> poblaciones3){
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
         
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("Cruce Shuffle");
         System.out.println("Rompecabezas 3X3");
-        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
-        HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblacion, 30, 50, 3);
+        
+        HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblaciones1, 30, 50, 3);
         
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("\n\n\n\n\n");
         System.out.println("Rompecabezas 5X5");
-        poblacion = llenarPuzzle(25,60);
-        crucesExitosos = genetico.ShuffleCrossover(poblacion, 60, 60, 5);
+        
+        crucesExitosos = genetico.ShuffleCrossover(poblaciones2, 60, 60, 5);
         
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("\n\n\n\n\n");
         System.out.println("Rompecabezas 7X7");
-        poblacion = llenarPuzzle(49,60);
-        crucesExitosos = genetico.ShuffleCrossover(poblacion, 90, 70, 7); 
+        
+        crucesExitosos = genetico.ShuffleCrossover(poblaciones3, 90, 70, 7); 
     }
     
     //Funcion principal en donde se hacen la llamada de los algoritmos
     public static void principal(){
 
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
-        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
-        geneticoCruceAnd(poblacion, genetico);
-      AlgoritmoGenetico genetico = new AlgoritmoGenetico();
-       HashMap<Integer, ArrayList> poblaciones1 = desordenar(9,30);
-       HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
-       HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
-
-       geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
-   
-
+        HashMap<Integer, ArrayList> poblaciones1 = desordenar(9,30);
+        HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
+        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
+        PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
     }
 
     public static void main(String[] args) {
         
-      PrintShuffleCrossover();
         principal();
 
 
