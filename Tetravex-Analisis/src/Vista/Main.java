@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 
@@ -14,11 +10,11 @@ import java.util.Random;
 
 
 //Melissa Alguera Castillo
-//Adrian Herrera Segura AKA Atloide
+//Adrian Herrera Segura
 //Richard Leon Chinchilla
 
 //Fecha inicio: 12 de Setiembre
-//Fecha ultima modificacion: 13 de Noviembre
+//Fecha ultima modificacion: 15 de Noviembre
 
 
 public class Main {
@@ -69,33 +65,42 @@ public class Main {
         poblacion = llenarPuzzle(49,90);
         HashMap<Integer, ArrayList> generacionesAnd7x7;
         generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblacion, 7),poblacion, 70);  
-        // System.out.println("Inicial: "+genetico.funcionFitness(poblacion, 3));
-       // System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd, 3));
     }
-
+    
+    public static void PrintShuffleCrossover(){
+        AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+        
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println("Cruce Shuffle");
+        System.out.println("Rompecabezas 3X3");
+        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
+        HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblacion, 30, 50, 3);
+        
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println("\n\n\n\n\n");
+        System.out.println("Rompecabezas 5X5");
+        poblacion = llenarPuzzle(25,60);
+        crucesExitosos = genetico.ShuffleCrossover(poblacion, 60, 60, 5);
+        
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println("\n\n\n\n\n");
+        System.out.println("Rompecabezas 7X7");
+        poblacion = llenarPuzzle(49,60);
+        crucesExitosos = genetico.ShuffleCrossover(poblacion, 90, 70, 7); 
+    }
+    
     //Funcion principal en donde se hacen la llamada de los algoritmos
     public static void principal(){
 
-      AlgoritmoGenetico genetico = new AlgoritmoGenetico();
-       HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
-         
-        //HashMap<Integer,Integer> matches = genetico.funcionFitness(poblacion, 3); ;
-       // System.out.println(poblacion);
-        //System.out.println("-----------------------------------------------");
-        //System.out.println(matches);
+        AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
         geneticoCruceAnd(poblacion, genetico);
-   
 
     }
 
     public static void main(String[] args) {
         
-        AlgoritmoGenetico genetico = new AlgoritmoGenetico();
-        HashMap<Integer, ArrayList> poblacion = llenarPuzzle(9,30);
-        HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblacion, 30, 50);
-        
-       
-        principal();
+      PrintShuffleCrossover();
 
 
     }
