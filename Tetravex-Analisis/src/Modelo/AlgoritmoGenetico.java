@@ -144,7 +144,7 @@ public class AlgoritmoGenetico {
                 comparaciones ++;
                 asignaciones ++;
             }
-            for (int i = breakPoint + 1; i < dimension*dimension; i++) { //Cuando se pasa el punto de cruce, se cambia a la informacion del segundo padre
+            for (int i = breakPoint; i < dimension*dimension; i++) { //Cuando se pasa el punto de cruce, se cambia a la informacion del segundo padre
                 hijoUno.add(padreDos.get(i)); //Se añade informacion al hijo uno
                 hijoDos.add(padreUno.get(i)); //Se añade informacion al hijo dos
                 comparaciones ++;
@@ -172,7 +172,9 @@ public class AlgoritmoGenetico {
         }
         
         System.out.println("--------------------TOP 5 HIJOS--------------------------------------");
-        //topHijos(crucesExitosos);
+        System.out.println(crucesExitosos.size());
+        System.out.println(crucesExitosos.get(2).size());
+        topHijos(crucesExitosos);
         System.out.println("---------------------------------------------------------------------");
         System.out.println("Asignaciones: " + asignaciones + ", Comparaciones: " + comparaciones);
         System.out.println("Cantidad total de instrucciones: " + (asignaciones + comparaciones));
