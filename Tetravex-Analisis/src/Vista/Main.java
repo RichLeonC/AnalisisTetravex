@@ -168,17 +168,41 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         // System.out.println("Inicial: "+genetico.funcionFitness(poblaciones3, 3));
          System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd7x7, 7));
     }
+    
+    public static void cruceKpoint (HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
+        HashMap<Integer, ArrayList> poblaciones3,  AlgoritmoGenetico genetico){
+        HashMap<Integer, Integer> matches3 = genetico.ordenarHashMap(genetico.funcionFitness(poblaciones1, 3));
+        HashMap<Integer, Integer> matches5 = genetico.ordenarHashMap(genetico.funcionFitness(poblaciones2, 5));
+        HashMap<Integer, Integer> matches7 = genetico.ordenarHashMap(genetico.funcionFitness(poblaciones3, 7));
+        
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println("Cruce Kpoint");
+        HashMap<Integer, ArrayList> generacionesAnd3x3 = genetico.kPoint(matches3,poblaciones1, 50, 3);   
+        System.out.println("3X3");
+        System.out.println(generacionesAnd3x3);
+        System.out.println("-------------------------------------------------------------------------------");
+        HashMap<Integer, ArrayList> generacionesAnd5x5 = genetico.kPoint(matches5,poblaciones2, 60, 5);   
+        System.out.println("5X5");
+        System.out.println(generacionesAnd5x5);
+        System.out.println("-------------------------------------------------------------------------------");
+        HashMap<Integer, ArrayList> generacionesAnd7x7 = genetico.kPoint(matches7,poblaciones3, 70, 7);   
+        System.out.println("7X7");
+        System.out.println(generacionesAnd7x7);
+    
+    
+    }
 
     //Funcion principal en donde se hacen la llamada de los algoritmos
     public static void principal(){
 
-      AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+       AlgoritmoGenetico genetico = new AlgoritmoGenetico();
        HashMap<Integer, ArrayList> poblaciones1 = desordenar(9,30);
        HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
 
-       geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
-       PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
+      // geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
+       //PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
+       cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
    
 
     }
