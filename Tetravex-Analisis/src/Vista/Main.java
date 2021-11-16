@@ -142,13 +142,13 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("\n\n\n\n\n");
         System.out.println("Rompecabezas 5X5");
         
-        crucesExitosos = genetico.ShuffleCrossover(poblaciones2, 60, 60, 5);
+        //crucesExitosos = genetico.ShuffleCrossover(poblaciones2, 60, 60, 5);
         
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("\n\n\n\n\n");
         System.out.println("Rompecabezas 7X7");
         
-        crucesExitosos = genetico.ShuffleCrossover(poblaciones3, 90, 70, 7); 
+        //crucesExitosos = genetico.ShuffleCrossover(poblaciones3, 90, 70, 7); 
     }
  
     public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
@@ -201,8 +201,8 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
 
       // geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
-       //PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
-       cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
+       PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
+       //cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
    
 
     }
