@@ -172,7 +172,8 @@ public class AlgoritmoGenetico {
         }
         
         System.out.println("--------------------TOP 5 HIJOS--------------------------------------");
-        //topHijos(crucesExitosos);
+        System.out.println("Cruce E: "+crucesExitosos.get(0).size());
+        topHijos(crucesExitosos);
         System.out.println("---------------------------------------------------------------------");
         System.out.println("Asignaciones: " + asignaciones + ", Comparaciones: " + comparaciones);
         System.out.println("Cantidad total de instrucciones: " + (asignaciones + comparaciones));
@@ -377,7 +378,7 @@ public class AlgoritmoGenetico {
     
     public void topHijos( HashMap<Integer,ArrayList> generaciones){
         int limite = (int) Math.sqrt(generaciones.get(0).size());
-
+        System.out.println("generaciones: "+generaciones.get(0).size());
         System.out.println("Limite: "+limite);
         HashMap<Integer,Integer> puntuaciones = funcionFitness(generaciones, limite);
         ArrayList<Integer>  values = new ArrayList(puntuaciones.values()); 

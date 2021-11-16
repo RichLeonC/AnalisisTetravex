@@ -158,15 +158,15 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("3X3");
         HashMap<Integer, ArrayList> generacionesAnd3x3;
          generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
-         System.out.println("5X5");
-         HashMap<Integer, ArrayList> generacionesAnd5x5;
-         generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblaciones2, 5),poblaciones2, 60);  
+       //  System.out.println("5X5");
+       //  HashMap<Integer, ArrayList> generacionesAnd5x5;
+       //  generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblaciones2, 5),poblaciones2, 60);  
          
-        System.out.println("7X7");
-        HashMap<Integer, ArrayList> generacionesAnd7x7;
-        generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblaciones3, 7),poblaciones3, 70);  
+      //  System.out.println("7X7");
+      //  HashMap<Integer, ArrayList> generacionesAnd7x7;
+      //  generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblaciones3, 7),poblaciones3, 70);  
         // System.out.println("Inicial: "+genetico.funcionFitness(poblaciones3, 3));
-         System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd7x7, 7));
+        // System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd7x7, 7));
     }
 
     //Funcion principal en donde se hacen la llamada de los algoritmos
@@ -177,8 +177,8 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
        HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
 
-       geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
-       PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
+       //geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
+      // PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
    
 
     }
