@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+>>>>>>> parent of cf2541f (Merge branch 'Proyecto2' of https://github.com/RichLeonC/AnalisisTetravex into Proyecto2)
 package Vista;
 
 import Modelo.AlgoritmoGenetico;
@@ -7,11 +15,11 @@ import java.util.HashMap;
 import java.util.Random;
 
 //Melissa Alguera Castillo
-//Adrian Herrera Segura
+//Adrian Herrera Segura AKA Atloide
 //Richard Leon Chinchilla
 
 //Fecha inicio: 12 de Setiembre
-//Fecha ultima modificacion: 15 de Noviembre
+//Fecha ultima modificacion: 13 de Noviembre
 
 
 public class Main {
@@ -120,6 +128,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("SizeP: "+poblacionesH.get(0).size());
         return poblacionesH;
     }
+<<<<<<< HEAD
     
     public static void PrintShuffleCrossover(HashMap<Integer, ArrayList> poblaciones1, HashMap<Integer, ArrayList> poblaciones2, HashMap<Integer, ArrayList> poblaciones3){
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
@@ -155,6 +164,40 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
 
     public static void main(String[] args) {
         
+=======
+    public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
+        HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
+        System.out.println("-------------------------------------------------------------------------------");
+       /* System.out.println("Cruce por operador logico AND");
+        System.out.println("3X3");
+        HashMap<Integer, ArrayList> generacionesAnd3x3;
+         generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
+         System.out.println("5X5");
+         HashMap<Integer, ArrayList> generacionesAnd5x5;
+         generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblaciones2, 5),poblaciones2, 60);  
+        */
+        System.out.println("7X7");
+        HashMap<Integer, ArrayList> generacionesAnd7x7;
+        generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblaciones3, 7),poblaciones3, 70);  
+        // System.out.println("Inicial: "+genetico.funcionFitness(poblaciones3, 3));
+         System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd7x7, 7));
+    }
+
+    //Funcion principal en donde se hacen la llamada de los algoritmos
+    public static void principal(){
+
+      AlgoritmoGenetico genetico = new AlgoritmoGenetico();
+       HashMap<Integer, ArrayList> poblaciones1 = desordenar(9,30);
+       HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
+       HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
+
+       geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
+   
+
+    }
+
+    public static void main(String[] args) {
+>>>>>>> parent of cf2541f (Merge branch 'Proyecto2' of https://github.com/RichLeonC/AnalisisTetravex into Proyecto2)
         principal();
 
 
