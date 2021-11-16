@@ -126,6 +126,7 @@ public class AlgoritmoGenetico {
         while (contadorCruces < cruces){ //Bucle que se detiene hasta que se hayan realizado todos los cruces solicitados
             int breakPoint = (int) (Math.random() * (dimension*dimension + 1)); //Punto de quiebre para el cruce
             comparaciones ++;
+            asignaciones++;
             System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
             
             if(contadorPoblaciones == cPoblaciones){ //Si ya no hay más cruces con la mejor poblacion, se cambia a la segunda mejor
