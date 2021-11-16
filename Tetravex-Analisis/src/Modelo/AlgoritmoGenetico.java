@@ -93,11 +93,11 @@ public class AlgoritmoGenetico {
 
     
     public HashMap<Integer, ArrayList> ShuffleCrossover(HashMap<Integer, ArrayList> poblaciones, int cPoblaciones, int cruces,int dimension){
-        int memoriaUtilizada = 0;
+        int memoriaUtilizada = 1;
         HashMap<Integer, Integer> cantidadMatches = funcionFitness(poblaciones, dimension); //Guarda la cantidad de matches de los rompecabezas padres 
-        memoriaUtilizada = cantidadMatches.size()*32*2;
+        //memoriaUtilizada = cantidadMatches.size()*32*2;
         HashMap<Integer, Integer> matchesOrdenados = ordenarHashMap(cantidadMatches); //Ordena la cantidad de matches de mayor a menor
-        memoriaUtilizada = matchesOrdenados.size()*32*2;
+        //memoriaUtilizada = matchesOrdenados.size()*32*2;
         HashMap<Integer, ArrayList> crucesExitosos = new HashMap(); //HashMap que guardará los cruces hijos
         ArrayList<Pieza> padreUno = new ArrayList(); //Array padre uno
         ArrayList<Pieza> padreDos = new ArrayList(); //Array padre dos
@@ -112,6 +112,8 @@ public class AlgoritmoGenetico {
         int comparaciones = 0;
         int asignaciones = 0;
         
+        asignaciones += 12;
+        
         values.sort(Collections.reverseOrder()); //Ordena los matches de mayor a menor
         asignaciones ++;
         System.out.println("Tipo de cruce: Cruce Shuffle");
@@ -120,11 +122,13 @@ public class AlgoritmoGenetico {
         asignaciones ++;
         
         padreUno = poblaciones.get(keys[0]); //Al padre uno se le asigna la mejor poblacion
+        
         asignaciones ++;
         Collections.shuffle(padreUno); //Se desordena la poblacion del primer padre
         
         while (contadorCruces < cruces){ //Bucle que se detiene hasta que se hayan realizado todos los cruces solicitados
             int breakPoint = (int) (Math.random() * (dimension*dimension + 1)); //Punto de quiebre para el cruce
+            asignaciones++;
             comparaciones ++;
             System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
             
@@ -174,13 +178,17 @@ public class AlgoritmoGenetico {
             contadorPoblaciones++;
         }
         
-        //memoriaUtilizada = (crucesExitosos.size() * 32) + crucesExitosos.get(0).size() * 176
+        memoriaUtilizada += (padreUno.size() * 172) * 6;
+        memoriaUtilizada += values.size() * 32;
+        memoriaUtilizada += 64;
+        memoriaUtilizada += (crucesExitosos.size() * 32) + crucesExitosos.get(0).size() * 176;
         
         System.out.println("--------------------TOP 5 HIJOS--------------------------------------");
         topHijos(crucesExitosos);
         System.out.println("---------------------------------------------------------------------");
         System.out.println("Asignaciones: " + asignaciones + ", Comparaciones: " + comparaciones);
         System.out.println("Cantidad total de instrucciones: " + (asignaciones + comparaciones));
+        System.out.println("Memoria Utilizada: " + memoriaUtilizada + " bits");
         return crucesExitosos;
     }
 
