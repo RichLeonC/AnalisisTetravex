@@ -201,8 +201,8 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
 
       // geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
-       PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
-       //cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
+       //PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
+       cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
    
 
     }
