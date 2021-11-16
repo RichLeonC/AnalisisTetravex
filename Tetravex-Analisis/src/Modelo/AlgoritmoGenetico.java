@@ -288,7 +288,7 @@ public class AlgoritmoGenetico {
        asigAnd++;
        values.sort(Collections.reverseOrder()); 
        HashMap<Integer,ArrayList> generaciones = new HashMap();
-       memoriaAnd+=generaciones.size()*32+generaciones.size()*176;
+     
        
        asigAnd++;
        ArrayList<Pieza> padre1 = new ArrayList();
@@ -371,12 +371,13 @@ public class AlgoritmoGenetico {
         }
         System.out.println("--------------------------TOP 5 HIJOS---------------------------");
         topHijos(generaciones);
+        memoriaAnd+=generaciones.size()*32+generaciones.size()*176;
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Memory: "+memoriaAnd+" bits");
         System.out.println("Asignaciones: "+asigAnd);
         System.out.println("Comparaciones: "+compAnd);
         System.out.println("Cantidad de instrucciones: "+(compAnd+asigAnd));
-       
+        
         return generaciones;
     }
     
@@ -404,35 +405,46 @@ public class AlgoritmoGenetico {
   public HashMap<Integer, ArrayList> kPoint (HashMap<Integer,Integer> cantidadMatches, HashMap<Integer, ArrayList> poblacion, int hijosP, int limite){
       int con=0;
       int asig=0;
-      
+      int memoriaKP =0;
       
       HashMap<Integer, ArrayList> hijos = new HashMap();// hijos producidos por los cruces y su key
       ArrayList<Pieza> combinacion = new ArrayList();// tetravex hijo 
       Object[] keys = cantidadMatches.keySet().toArray();// llaves de cantidadMatches
+      memoriaKP+=keys.length*32;
       asig++;
       
       
       Random cantidadCruces = new Random();// cantidad de matches que va a realizar la solucion local 
       int numero = cantidadCruces.nextInt(limite+1)+2;
       asig++;
+      memoriaKP+=32;
       int cantidadSeparacion = (limite*limite)/numero;// cada cuanto va a haber una separación
       asig++;
+      memoriaKP+=32;
       boolean cambio= true;// usar el primero o  segundo  padre
       asig++;
+      memoriaKP+=8;
       int cantiC =0; //cantidad antes de cambiar
       asig++;
+      memoriaKP+=32;
       int contaP1  = 0; // contador de uso de padres 
       asig++;
+      memoriaKP+=32;
       int keyHijo= 0; // keys para los hijos
       asig++;
+      memoriaKP+=32;
       int contaP2 =1;
       asig++;
+      memoriaKP+=32;
       int aux =1;
       asig++;
+      memoriaKP+=32;
       
       ArrayList<Pieza> padre1 = poblacion.get(keys[contaP1]);
       asig++;
+      memoriaKP+= (padre1.size()*176);
       ArrayList<Pieza> padre2 = poblacion.get(keys[contaP2]);
+      memoriaKP+= (padre2.size()*176);
       asig++;
       
       while (hijosP  > keyHijo){  
@@ -494,7 +506,7 @@ public class AlgoritmoGenetico {
                  asig++;
             }
  
-           
+            
             hijos.put(keyHijo, combinacion);
             asig++;
             keyHijo++;
@@ -503,7 +515,13 @@ public class AlgoritmoGenetico {
       }
       
       
-      System.out.println("asignaciones: " +  asig + " comparaciones: " + con);
+     
+      memoriaKP+=(hijos.size()*32)+(hijos.size()*176);
+      System.out.println("asignaciones: " +  asig + " comparaciones: " + con + " Memoria: " + memoriaKP + " Lineas Totales: "
+              + (asig + con) );
+      System.out.println("--------------------------TOP 5 HIJOS---------------------------");
+      topHijos(hijos);
+    
       return hijos;
       
 }
