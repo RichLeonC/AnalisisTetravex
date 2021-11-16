@@ -361,13 +361,14 @@ public class AlgoritmoGenetico {
              
             
         }
-           
+        System.out.println("--------------------------TOP 5 HIJOS---------------------------");
+        topHijos(generaciones);
+        System.out.println("----------------------------------------------------------------------");
         System.out.println("Memory: "+memoriaAnd+" bits");
         System.out.println("Asignaciones: "+asigAnd);
         System.out.println("Comparaciones: "+compAnd);
         System.out.println("Cantidad de instrucciones: "+(compAnd+asigAnd));
-        
-        topHijos(generaciones);
+       
         return generaciones;
     }
     
@@ -377,22 +378,16 @@ public class AlgoritmoGenetico {
         System.out.println("Limite: "+limite);
         HashMap<Integer,Integer> puntuaciones = funcionFitness(generaciones, limite);
         ArrayList<Integer>  values = new ArrayList(puntuaciones.values()); 
-         values.sort(Collections.reverseOrder());
+        Collections.sort(values, Collections.reverseOrder());  
         int cont = 0;
          for(int i =0;i<puntuaciones.size();i++){ //Recorre todos las puntuaciones
             if(Objects.equals(puntuaciones.get(i), values.get(cont))&&cont<5){ //Si la llave de una puntuacion es la de una puntuacion del arraylist de solo puntaciones
                 cont++;
-                i=0;
                 System.out.println("Hijo: "+generaciones.get(i)+ "\n puntuacion: "+puntuaciones.get(i));
+                i=0;
             }
         }
     }
-   public static void premain(String args, Instrumentation inst) {
-    instrumentation = inst;
-  }
-
-  public static long getObjectSize(Object o) {
-    return instrumentation.getObjectSize(o);
-  }
+  
     
 }

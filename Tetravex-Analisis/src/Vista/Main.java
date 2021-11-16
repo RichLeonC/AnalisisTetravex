@@ -128,10 +128,10 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         return poblacionesH;
     }
     public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
-            HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
+        HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
         System.out.println("-------------------------------------------------------------------------------");
-        System.out.println("Cruce por operador logico AND");
-        /*System.out.println("3X3");
+       /* System.out.println("Cruce por operador logico AND");
+        System.out.println("3X3");
         HashMap<Integer, ArrayList> generacionesAnd3x3;
          generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
          System.out.println("5X5");
