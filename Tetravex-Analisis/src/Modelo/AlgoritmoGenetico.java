@@ -366,10 +366,27 @@ public class AlgoritmoGenetico {
         System.out.println("Asignaciones: "+asigAnd);
         System.out.println("Comparaciones: "+compAnd);
         System.out.println("Cantidad de instrucciones: "+(compAnd+asigAnd));
+        
+        topHijos(generaciones);
         return generaciones;
     }
     
-    
+    public void topHijos( HashMap<Integer,ArrayList> generaciones){
+        int limite = (int) Math.sqrt(generaciones.get(0).size());
+
+        System.out.println("Limite: "+limite);
+        HashMap<Integer,Integer> puntuaciones = funcionFitness(generaciones, limite);
+        ArrayList<Integer>  values = new ArrayList(puntuaciones.values()); 
+         values.sort(Collections.reverseOrder());
+        int cont = 0;
+         for(int i =0;i<puntuaciones.size();i++){ //Recorre todos las puntuaciones
+            if(Objects.equals(puntuaciones.get(i), values.get(cont))&&cont<5){ //Si la llave de una puntuacion es la de una puntuacion del arraylist de solo puntaciones
+                cont++;
+                i=0;
+                System.out.println("Hijo: "+generaciones.get(i)+ "\n puntuacion: "+puntuaciones.get(i));
+            }
+        }
+    }
    public static void premain(String args, Instrumentation inst) {
     instrumentation = inst;
   }
