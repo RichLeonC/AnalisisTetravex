@@ -181,13 +181,13 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("3X3");
         System.out.println(generacionesAnd3x3);
         System.out.println("-------------------------------------------------------------------------------");
-        HashMap<Integer, ArrayList> generacionesAnd5x5 = genetico.kPoint(matches5,poblaciones2, 60, 5);   
+       // HashMap<Integer, ArrayList> generacionesAnd5x5 = genetico.kPoint(matches5,poblaciones2, 60, 5);   
         System.out.println("5X5");
-        System.out.println(generacionesAnd5x5);
+        //System.out.println(generacionesAnd5x5);
         System.out.println("-------------------------------------------------------------------------------");
-        HashMap<Integer, ArrayList> generacionesAnd7x7 = genetico.kPoint(matches7,poblaciones3, 70, 7);   
+        //HashMap<Integer, ArrayList> generacionesAnd7x7 = genetico.kPoint(matches7,poblaciones3, 70, 7);   
         System.out.println("7X7");
-        System.out.println(generacionesAnd7x7);
+        //System.out.println(generacionesAnd7x7);
     
     
     }
