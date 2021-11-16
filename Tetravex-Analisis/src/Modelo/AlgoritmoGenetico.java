@@ -170,7 +170,9 @@ public class AlgoritmoGenetico {
             contadorPoblaciones++;
         }
         
-        
+        System.out.println("--------------------TOP 5 HIJOS--------------------------------------");
+        //topHijos(crucesExitosos);
+        System.out.println("---------------------------------------------------------------------");
         System.out.println("Asignaciones: " + asignaciones + ", Comparaciones: " + comparaciones);
         System.out.println("Cantidad total de instrucciones: " + (asignaciones + comparaciones));
         return crucesExitosos;
