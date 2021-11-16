@@ -379,7 +379,7 @@ public class AlgoritmoGenetico {
     
     public void topHijos( HashMap<Integer,ArrayList> generaciones){
         int limite = (int) Math.sqrt(generaciones.get(0).size());
-
+        System.out.println("generaciones: "+generaciones.get(0).size());
         System.out.println("Limite: "+limite);
         HashMap<Integer,Integer> puntuaciones = funcionFitness(generaciones, limite);
         ArrayList<Integer>  values = new ArrayList(puntuaciones.values()); 
