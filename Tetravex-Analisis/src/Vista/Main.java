@@ -18,15 +18,17 @@ import java.util.Random;
 //Adrian Herrera Segura AKA Atloide
 //Richard Leon Chinchilla
 
-//Fecha inicio: 12 de Setiembre
-//Fecha ultima modificacion: 13 de Noviembre
+
+//Fecha ultima modificacion: 17 de Noviembre
 
 
 public class Main {
     
-    public static boolean isPrimera(int numero,int posicion){ //Verifica si la pieza pasada era multiplo
+    public static boolean isPrimera(int numero,int posicion){ //Verifica si la pieza es multiplo
         return (posicion-1)%numero == 0;
     }
+    
+    //Se encarga de crear las piezas para un tetravex, retorna un tetravex armado
 public static ArrayList<Pieza> llenarPuzzle(int orden){
         Random aleatorio = new Random();
         int limite = 9;
@@ -104,39 +106,40 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         return piezasArmadas;
     }
 
-       //Funcion que se encarga de desordenar el arrayList de piezasArmadas 
+       //Funcion que se encarga de desordenar y crear los tetravex, retorna las poblacionesIniciales
     public static HashMap<Integer, ArrayList> desordenar(int piezas,int poblaciones){
         Random aleatorio = new Random();
         int numero;
         int numPieza = 1;
-        ArrayList<Pieza> piezasA;
-        ArrayList<Pieza> piezasD = new ArrayList();
-        HashMap<Integer, ArrayList> poblacionesH = new HashMap();
-        for(int i = 0;i<poblaciones;i++){
-            piezasA = llenarPuzzle(piezas);
-             while(!piezasA.isEmpty()){
+        ArrayList<Pieza> piezasA; //Piezas armadas
+        ArrayList<Pieza> piezasD = new ArrayList(); //Piezas desordenadas
+        HashMap<Integer, ArrayList> poblacionesH = new HashMap(); //PoblacionesIniciales
+        for(int i = 0;i<poblaciones;i++){ //Se recorre la cantidad de poblaciones que se requiere
+            piezasA = llenarPuzzle(piezas);   //Tetravex armado
+             while(!piezasA.isEmpty()){  //Se saca todas las piezas del tetravex armado y se insertan en uno nuevo pero de manera desordenada.
                  numero = aleatorio.nextInt(piezasA.size());
                  piezasA.get(numero).setNumPieza(numPieza);
                 piezasD.add(piezasA.get(numero));
                 piezasA.remove(piezasA.get(numero));
                 numPieza++;
             }
-             poblacionesH.put(i, piezasD);
-             piezasD = new ArrayList();
+             poblacionesH.put(i, piezasD); //Se agrega a las poblaciones 
+             piezasD = new ArrayList(); //Reseteamos
              numPieza=1;
         }
         System.out.println("SizeP: "+poblacionesH.get(0).size());
         return poblacionesH;
     }
-
+    
+    //Funcion que imprime el cruce shuffle en todas sus dimensiones
     public static void PrintShuffleCrossover(HashMap<Integer, ArrayList> poblaciones1, HashMap<Integer, ArrayList> poblaciones2, HashMap<Integer, ArrayList> poblaciones3){
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
-        
+         HashMap<Integer, ArrayList> crucesExitosos;
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("Cruce Shuffle");
         System.out.println("Rompecabezas 3X3");
         
-        HashMap<Integer, ArrayList> crucesExitosos = genetico.ShuffleCrossover(poblaciones1, 30, 50, 3);
+        crucesExitosos = genetico.ShuffleCrossover(poblaciones1, 30, 50, 3);
         
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("\n\n\n\n\n");
@@ -151,24 +154,22 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         crucesExitosos = genetico.ShuffleCrossover(poblaciones3, 90, 70, 7); 
     }
  
+    //Funcion que imprime el cruce and en todas sus dimensiones
     public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
         HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("Cruce por operador logico AND");
         System.out.println("3X3");
-        HashMap<Integer, ArrayList> generacionesAnd3x3;
-         generacionesAnd3x3 = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
-       //  System.out.println("5X5");
-       //  HashMap<Integer, ArrayList> generacionesAnd5x5;
-       //  generacionesAnd5x5 = genetico.cruceAnd(genetico.funcionFitness(poblaciones2, 5),poblaciones2, 60);  
-         
-      //  System.out.println("7X7");
-      //  HashMap<Integer, ArrayList> generacionesAnd7x7;
-      //  generacionesAnd7x7 = genetico.cruceAnd(genetico.funcionFitness(poblaciones3, 7),poblaciones3, 70);  
-        // System.out.println("Inicial: "+genetico.funcionFitness(poblaciones3, 3));
-        // System.out.println("Generaciones: "+genetico.funcionFitness(generacionesAnd7x7, 7));
+        HashMap<Integer, ArrayList> generacionesAnd;
+         generacionesAnd = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
+         System.out.println("5X5");
+         generacionesAnd = genetico.cruceAnd(genetico.funcionFitness(poblaciones2, 5),poblaciones2, 60);      
+        System.out.println("7X7");
+        generacionesAnd = genetico.cruceAnd(genetico.funcionFitness(poblaciones3, 7),poblaciones3, 70);  
+ 
     }
     
+    //Funcion que imprime el cruce KPoint en todas sus dimensiones
     public static void cruceKpoint (HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
         HashMap<Integer, ArrayList> poblaciones3,  AlgoritmoGenetico genetico){
         HashMap<Integer, Integer> matches3 = genetico.ordenarHashMap(genetico.funcionFitness(poblaciones1, 3));
@@ -177,17 +178,15 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("Cruce Kpoint");
-        HashMap<Integer, ArrayList> generacionesAnd3x3 = genetico.kPoint(matches3,poblaciones1, 50, 3);   
+        HashMap<Integer, ArrayList> generaciones = genetico.kPoint(matches3,poblaciones1, 50, 3);   
         System.out.println("3X3");
-        System.out.println(generacionesAnd3x3);
-        System.out.println("-------------------------------------------------------------------------------");
-        HashMap<Integer, ArrayList> generacionesAnd5x5 = genetico.kPoint(matches5,poblaciones2, 60, 5);   
+       System.out.println("-------------------------------------------------------------------------------");
+       generaciones= genetico.kPoint(matches5,poblaciones2, 60, 5);   
         System.out.println("5X5");
-        System.out.println(generacionesAnd5x5);
         System.out.println("-------------------------------------------------------------------------------");
-        HashMap<Integer, ArrayList> generacionesAnd7x7 = genetico.kPoint(matches7,poblaciones3, 70, 7);   
+        generaciones = genetico.kPoint(matches7,poblaciones3, 70, 7);   
         System.out.println("7X7");
-        System.out.println(generacionesAnd7x7);
+      //  System.out.println(generacionesAnd7x7);
     
     
     }
@@ -199,10 +198,29 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
        HashMap<Integer, ArrayList> poblaciones1 = desordenar(9,30);
        HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
-
-      // geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
-       //PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
-       cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
+       
+             long startTime = System.nanoTime();
+                 geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
+             long endTime = System.nanoTime();
+       
+             long timeElapsed = endTime- startTime;
+             System.out.println("Tiempo: "+timeElapsed);
+             
+              startTime = System.nanoTime();
+                  PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
+             endTime = System.nanoTime();
+             
+             timeElapsed = endTime- startTime;
+             System.out.println("Tiempo: "+timeElapsed);
+             
+             startTime = System.nanoTime();
+                  cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
+             endTime = System.nanoTime();
+       
+             timeElapsed = endTime- startTime;
+             System.out.println("Tiempo: "+timeElapsed);
+     
+    
    
 
     }

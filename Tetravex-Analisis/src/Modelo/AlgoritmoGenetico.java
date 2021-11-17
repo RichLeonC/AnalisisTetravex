@@ -46,25 +46,27 @@ public class AlgoritmoGenetico {
         return posicion>=(limite*limite)-limite;
     }
     
+    //Función que se encarga de realizar la puntuación de cada población, retorna una nueva hashmap con # de
+   // población como Key y su puntuación como Value
     public HashMap<Integer, Integer> funcionFitness(HashMap<Integer, ArrayList> poblaciones, int limite) {
         int matches = 0;
         HashMap<Integer, Integer> cantidadMatches = new HashMap();
         
-        for (int i=0; i<poblaciones.size() ; i++){
-            ArrayList<Pieza> tetravex= poblaciones.get(i);
+        for (int i=0; i<poblaciones.size() ; i++){ //Recorremos todas las poblaciones
+            ArrayList<Pieza> tetravex= poblaciones.get(i); //Obtenemos una poblacion
            
-            for (int j=0; j<tetravex.size(); j++){
+            for (int j=0; j<tetravex.size(); j++){ //La recorremos
                 Pieza piezaActual = tetravex.get(j);
                 //System.out.println(j);
-                if (!isLastLine(limite,j)){
+                if (!isLastLine(limite,j)){ //Pregunta si no es última fila 
                     Pieza siguientePieza = tetravex.get(j+1);
                     Pieza piezaAbajo =tetravex.get(j+limite);
                 
-                    if (isUltimo(limite, j)){
-                        if (piezaActual.getSur()== piezaAbajo.getNorte())
+                    if (isUltimo(limite, j)){ //Pregunta si es ultimo elemento de fila
+                        if (piezaActual.getSur()== piezaAbajo.getNorte()) //Pregunta si el sur de la pieza coincide con la de abajo en el norte
                             matches++;
                     }  
-                    else{
+                    else{ //No es ni ultima fila ni ultimo elemento de fila
                         if (piezaActual.getEste() == siguientePieza.getOeste())
                             matches++;
                         if (piezaActual.getSur()== piezaAbajo.getNorte())
@@ -73,13 +75,13 @@ public class AlgoritmoGenetico {
                 
                 }
   
-                else if(isLastLine(limite,j)){
-                    if ((limite*limite)-1== j){
+                else if(isLastLine(limite,j)){ //Si es ultima fila
+                    if ((limite*limite)-1== j){ //Pregunta si se llego al ultimo elemento
                         cantidadMatches.put(i, matches);
                         matches=0;
                     }
                 
-                    else{
+                    else{ //Sino que sume uno a la puntuacion 
                         Pieza siguientePieza = tetravex.get(j+1);
                         if (piezaActual.getEste() == siguientePieza.getOeste())
                             matches++;
@@ -131,12 +133,12 @@ public class AlgoritmoGenetico {
             asignaciones++;
             comparaciones ++;
             asignaciones++;
-            System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
+        //    System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
             
             if(contadorPoblaciones == cPoblaciones){ //Si ya no hay más cruces con la mejor poblacion, se cambia a la segunda mejor
                 padreUno = poblaciones.get(keys[1]); //Se cambia el valor del primer padre
                 contadorPoblaciones = 3;
-                System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(1));
+           //     System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(1));
                 
                 asignaciones += 2;
                 comparaciones ++;
@@ -145,7 +147,7 @@ public class AlgoritmoGenetico {
             padreDos = poblaciones.get(keys[contadorPoblaciones]); //Se asigna el segundo padre
             asignaciones ++;
             Collections.shuffle(padreDos); //Se desordena la poblacion del segundo padre
-            System.out.println("Padre 2: " + padreDos + "Puntuacion: " + values.get(contadorPoblaciones));
+          //  System.out.println("Padre 2: " + padreDos + "Puntuacion: " + values.get(contadorPoblaciones));
             for (int i = 0; i < breakPoint; i++) { //Se crean los hijos con la informacion de un padre hasta el punto de cruce
                 hijoUno.add(padreUno.get(i)); //Se añade informacion al hijo uno
                 hijoDos.add(padreDos.get(i)); //Se añade informacion al hijo dos
@@ -161,11 +163,11 @@ public class AlgoritmoGenetico {
             
             hijoUnoClone = (ArrayList<Pieza>) hijoUno.clone(); //Se clona al hijo uno para no tener poblemas de dirección de memoria
             asignaciones ++;
-            System.out.println("Hijo 1: " + hijoUnoClone + "puntuacion: " + puntacionIndividual(hijoUnoClone));
+          //  System.out.println("Hijo 1: " + hijoUnoClone + "puntuacion: " + puntacionIndividual(hijoUnoClone));
             
             hijoDosClone = (ArrayList<Pieza>) hijoDos.clone(); //Se clona al hijo dos para no tener poblemas de dirección de memoria
             asignaciones ++;
-            System.out.println("Hijo 2: " + hijoDosClone + "puntuacion: " + puntacionIndividual(hijoDosClone));
+        //    System.out.println("Hijo 2: " + hijoDosClone + "puntuacion: " + puntacionIndividual(hijoDosClone));
             
             crucesExitosos.put(contadorCruces, hijoUnoClone); //Se añade el hijo uno a la hash de cruces exitosos
             contadorCruces ++;
@@ -369,9 +371,9 @@ public class AlgoritmoGenetico {
                  asigAnd++;
                  pob++;
                  asigAnd++;
-                 System.out.println("Padre1: "+padre1+" - puntuacion: "+puntuacionP1);
-                 System.out.println("Padre2: "+padre2+" - puntuacion: "+matches.get(pob));
-                 System.out.println("Hijo: "+hijo+" - puntuacion: "+puntacionIndividual(hijo));
+              //   System.out.println("Padre1: "+padre1+" - puntuacion: "+puntuacionP1);
+              //   System.out.println("Padre2: "+padre2+" - puntuacion: "+matches.get(pob));
+              //   System.out.println("Hijo: "+hijo+" - puntuacion: "+puntacionIndividual(hijo));
                  compAnd++;
                  if(gen==totalG) pob=poblacionesIniciales.size(); //Si ya se llego al total de generaciones requeridas, rompemos el while
              }
