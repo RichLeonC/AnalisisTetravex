@@ -187,7 +187,7 @@ public class AlgoritmoGenetico {
         
         System.out.println("--------------------TOP 5 HIJOS--------------------------------------");
         topHijos(crucesExitosos);
-        System.out.println("---------------------------------------------------------------------");
+        System.out.println("-----------------------------Mediciones----------------------------------------");
         System.out.println("Asignaciones: " + asignaciones + ", Comparaciones: " + comparaciones);
         System.out.println("Cantidad total de instrucciones: " + (asignaciones + comparaciones));
         System.out.println("Memoria Utilizada: " + memoriaUtilizada + " bits");
@@ -371,9 +371,9 @@ public class AlgoritmoGenetico {
                  asigAnd++;
                  pob++;
                  asigAnd++;
-              //   System.out.println("Padre1: "+padre1+" - puntuacion: "+puntuacionP1);
-              //   System.out.println("Padre2: "+padre2+" - puntuacion: "+matches.get(pob));
-              //   System.out.println("Hijo: "+hijo+" - puntuacion: "+puntacionIndividual(hijo));
+                 System.out.println("Padre1: "+padre1+" - puntuacion: "+puntuacionP1);
+                 System.out.println("Padre2: "+padre2+" - puntuacion: "+matches.get(pob));
+                 System.out.println("Hijo: "+hijo+" - puntuacion: "+puntacionIndividual(hijo));
                  compAnd++;
                  if(gen==totalG) pob=poblacionesIniciales.size(); //Si ya se llego al total de generaciones requeridas, rompemos el while
              }
@@ -383,7 +383,7 @@ public class AlgoritmoGenetico {
         System.out.println("--------------------------TOP 5 HIJOS---------------------------");
         topHijos(generaciones);
         memoriaAnd+=generaciones.size()*32+generaciones.size()*176;
-        System.out.println("----------------------------------------------------------------------");
+        System.out.println("----------------------------Mediciones------------------------------------------");
         System.out.println("Memory: "+memoriaAnd+" bits");
         System.out.println("Asignaciones: "+asigAnd);
         System.out.println("Comparaciones: "+compAnd);
@@ -394,8 +394,6 @@ public class AlgoritmoGenetico {
     
     public void topHijos( HashMap<Integer,ArrayList> generaciones){
         int limite = (int) Math.sqrt(generaciones.get(0).size());
-        System.out.println("generaciones: "+generaciones.get(0).size());
-        System.out.println("Limite: "+limite);
         HashMap<Integer,Integer> puntuaciones = funcionFitness(generaciones, limite);
         ArrayList<Integer>  values = new ArrayList(puntuaciones.values()); 
         Collections.sort(values, Collections.reverseOrder());  
@@ -528,6 +526,7 @@ public class AlgoritmoGenetico {
       
      
       memoriaKP+=(hijos.size()*32)+(hijos.size()*176);
+       System.out.println("----------------------------Mediciones------------------------------------------");
       System.out.println("asignaciones: " +  asig + " comparaciones: " + con + " Memoria: " + memoriaKP + " Lineas Totales: "
               + (asig + con) );
       System.out.println("--------------------------TOP 5 HIJOS---------------------------");

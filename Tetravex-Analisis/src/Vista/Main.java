@@ -127,7 +127,6 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
              piezasD = new ArrayList(); //Reseteamos
              numPieza=1;
         }
-        System.out.println("SizeP: "+poblacionesH.get(0).size());
         return poblacionesH;
     }
     
@@ -158,7 +157,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
     public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
         HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
         System.out.println("-------------------------------------------------------------------------------");
-        System.out.println("Cruce por operador logico AND");
+        System.out.println("Tipo de cruce: Cruce por operador logico AND");
         System.out.println("3X3");
         HashMap<Integer, ArrayList> generacionesAnd;
          generacionesAnd = genetico.cruceAnd(genetico.funcionFitness(poblaciones1, 3),poblaciones1, 50);   
@@ -180,6 +179,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("Cruce Kpoint");
         HashMap<Integer, ArrayList> generaciones = genetico.kPoint(matches3,poblaciones1, 50, 3);   
         System.out.println("3X3");
+        System.out.println(generaciones);
        System.out.println("-------------------------------------------------------------------------------");
        generaciones= genetico.kPoint(matches5,poblaciones2, 60, 5);   
         System.out.println("5X5");
@@ -199,25 +199,25 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
        HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
        
-             long startTime = System.nanoTime();
+            /* long startTime = System.nanoTime();
                  geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
              long endTime = System.nanoTime();
        
              long timeElapsed = endTime- startTime;
-             System.out.println("Tiempo: "+timeElapsed);
+             System.out.println("Tiempo: "+timeElapsed);*/
              
-              startTime = System.nanoTime();
-                  PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
-             endTime = System.nanoTime();
+              /*long startTime = System.nanoTime();
+                 PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
+             long endTime = System.nanoTime();
              
-             timeElapsed = endTime- startTime;
-             System.out.println("Tiempo: "+timeElapsed);
+          long   timeElapsed = endTime- startTime;
+             System.out.println("Tiempo: "+timeElapsed);*/
              
-             startTime = System.nanoTime();
+            long startTime = System.nanoTime();
                   cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
-             endTime = System.nanoTime();
+          long   endTime = System.nanoTime();
        
-             timeElapsed = endTime- startTime;
+           long  timeElapsed = endTime- startTime;
              System.out.println("Tiempo: "+timeElapsed);
      
     
