@@ -18,7 +18,7 @@ import java.util.Random;
 //Adrian Herrera Segura AKA Atloide
 //Richard Leon Chinchilla
 
-
+//Inicio: 1 de Noviembre
 //Fecha ultima modificacion: 17 de Noviembre
 
 
@@ -179,15 +179,15 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         System.out.println("Cruce Kpoint");
         System.out.println("3X3");
         HashMap<Integer, ArrayList> generaciones = genetico.kPoint(matches3,poblaciones1, 50, 3);   
-        //System.out.println(generaciones);
+
         System.out.println("-------------------------------------------------------------------------------");
         System.out.println("5X5");
         generaciones= genetico.kPoint(matches5,poblaciones2, 60, 5);   
-        //System.out.println(generaciones);
+
         System.out.println("-------------------------------------------------------------------------------");
          System.out.println("7X7");
         generaciones = genetico.kPoint(matches7,poblaciones3, 70, 7);   
-      //  System.out.println(generaciones);
+
     
     
     }
@@ -200,25 +200,25 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
        HashMap<Integer, ArrayList> poblaciones2 = desordenar(25,60);
        HashMap<Integer, ArrayList> poblaciones3 = desordenar(49,90);
        
-            /* long startTime = System.nanoTime();
+             long startTime = System.nanoTime();
                  geneticoCruceAnd(poblaciones1,poblaciones2,poblaciones3,genetico);
              long endTime = System.nanoTime();
        
              long timeElapsed = endTime- startTime;
-             System.out.println("Tiempo: "+timeElapsed);*/
+             System.out.println("Tiempo: "+timeElapsed);
              
-              /*long startTime = System.nanoTime();
+               startTime = System.nanoTime();
                  PrintShuffleCrossover(poblaciones1, poblaciones2, poblaciones3);
-             long endTime = System.nanoTime();
+              endTime = System.nanoTime();
              
-          long   timeElapsed = endTime- startTime;
-             System.out.println("Tiempo: "+timeElapsed);*/
+             timeElapsed = endTime- startTime;
+             System.out.println("Tiempo: "+timeElapsed);
              
-            long startTime = System.nanoTime();
+             startTime = System.nanoTime();
                   cruceKpoint(poblaciones1,poblaciones2,poblaciones3, genetico);
-          long   endTime = System.nanoTime();
+             endTime = System.nanoTime();
        
-           long  timeElapsed = endTime- startTime;
+             timeElapsed = endTime- startTime;
              System.out.println("Tiempo: "+timeElapsed);
      
     
