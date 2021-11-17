@@ -134,7 +134,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
     public static void PrintShuffleCrossover(HashMap<Integer, ArrayList> poblaciones1, HashMap<Integer, ArrayList> poblaciones2, HashMap<Integer, ArrayList> poblaciones3){
         AlgoritmoGenetico genetico = new AlgoritmoGenetico();
          HashMap<Integer, ArrayList> crucesExitosos;
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------");
         System.out.println("Cruce Shuffle");
         System.out.println("Rompecabezas 3X3");
         
@@ -156,7 +156,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
     //Funcion que imprime el cruce and en todas sus dimensiones
     public static void geneticoCruceAnd(HashMap<Integer, ArrayList> poblaciones1,HashMap<Integer, ArrayList> poblaciones2,
         HashMap<Integer, ArrayList> poblaciones3, AlgoritmoGenetico genetico){
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------");
         System.out.println("Tipo de cruce: Cruce por operador logico AND");
         System.out.println("3X3");
         HashMap<Integer, ArrayList> generacionesAnd;
@@ -175,7 +175,7 @@ public static ArrayList<Pieza> llenarPuzzle(int orden){
         HashMap<Integer, Integer> matches5 = genetico.ordenarHashMap(genetico.funcionFitness(poblaciones2, 5));
         HashMap<Integer, Integer> matches7 = genetico.ordenarHashMap(genetico.funcionFitness(poblaciones3, 7));
         
-        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------");
         System.out.println("Cruce Kpoint");
         System.out.println("3X3");
         HashMap<Integer, ArrayList> generaciones = genetico.kPoint(matches3,poblaciones1, 50, 3);   
