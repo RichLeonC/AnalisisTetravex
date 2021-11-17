@@ -416,6 +416,7 @@ public class AlgoritmoGenetico {
       int con=0;
       int asig=0;
       int memoriaKP =0;
+      int puntos=0;
       
       HashMap<Integer, ArrayList> hijos = new HashMap();// hijos producidos por los cruces y su key
       ArrayList<Pieza> combinacion = new ArrayList();// tetravex hijo 
@@ -452,8 +453,10 @@ public class AlgoritmoGenetico {
       
       ArrayList<Pieza> padre1 = poblacion.get(keys[contaP1]); // se toma el primer padre1
       asig++;
+     
       memoriaKP+= (padre1.size()*176);
       ArrayList<Pieza> padre2 = poblacion.get(keys[contaP2]);// se toma el primer padre2
+    
       memoriaKP+= (padre2.size()*176);
       asig++;
       
@@ -492,9 +495,12 @@ public class AlgoritmoGenetico {
                  
               }
           }
+             System.out.println("Padre1:" + padre1 + "- puntuacion:" + puntacionIndividual(padre1));
+             System.out.println("Padre2:" + padre2 + "- puntuacion:" + puntacionIndividual(padre2));
+             System.out.println("Hijo:" + combinacion + "- puntuacion:" + puntacionIndividual(combinacion));
       
             contaP2++;
-             asig++;
+            asig++;
             if(contaP2< poblacion.size()){// nueva asignación de padre 2
                 padre2 =poblacion.get(keys[contaP2]);
                 con++;
