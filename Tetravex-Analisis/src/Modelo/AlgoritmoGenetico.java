@@ -15,7 +15,6 @@ public class AlgoritmoGenetico {
     private int asigAnd;
     private int compAnd;
     private int memoriaAnd;
-    private static Instrumentation instrumentation;
     public AlgoritmoGenetico() {
         asigAnd=compAnd=memoriaAnd=0;
     }
@@ -133,12 +132,12 @@ public class AlgoritmoGenetico {
             asignaciones++;
             comparaciones ++;
             asignaciones++;
-        //    System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
+            System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(0));
             
             if(contadorPoblaciones == cPoblaciones){ //Si ya no hay más cruces con la mejor poblacion, se cambia a la segunda mejor
                 padreUno = poblaciones.get(keys[1]); //Se cambia el valor del primer padre
                 contadorPoblaciones = 3;
-           //     System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(1));
+                System.out.println("Padre 1: " + padreUno + "Puntuacion: " + values.get(1));
                 
                 asignaciones += 2;
                 comparaciones ++;
@@ -147,7 +146,7 @@ public class AlgoritmoGenetico {
             padreDos = poblaciones.get(keys[contadorPoblaciones]); //Se asigna el segundo padre
             asignaciones ++;
             Collections.shuffle(padreDos); //Se desordena la poblacion del segundo padre
-          //  System.out.println("Padre 2: " + padreDos + "Puntuacion: " + values.get(contadorPoblaciones));
+            System.out.println("Padre 2: " + padreDos + "Puntuacion: " + values.get(contadorPoblaciones));
             for (int i = 0; i < breakPoint; i++) { //Se crean los hijos con la informacion de un padre hasta el punto de cruce
                 hijoUno.add(padreUno.get(i)); //Se añade informacion al hijo uno
                 hijoDos.add(padreDos.get(i)); //Se añade informacion al hijo dos
@@ -163,11 +162,11 @@ public class AlgoritmoGenetico {
             
             hijoUnoClone = (ArrayList<Pieza>) hijoUno.clone(); //Se clona al hijo uno para no tener poblemas de dirección de memoria
             asignaciones ++;
-          //  System.out.println("Hijo 1: " + hijoUnoClone + "puntuacion: " + puntacionIndividual(hijoUnoClone));
+            System.out.println("Hijo 1: " + hijoUnoClone + "puntuacion: " + puntacionIndividual(hijoUnoClone));
             
             hijoDosClone = (ArrayList<Pieza>) hijoDos.clone(); //Se clona al hijo dos para no tener poblemas de dirección de memoria
             asignaciones ++;
-        //    System.out.println("Hijo 2: " + hijoDosClone + "puntuacion: " + puntacionIndividual(hijoDosClone));
+           System.out.println("Hijo 2: " + hijoDosClone + "puntuacion: " + puntacionIndividual(hijoDosClone));
             
             crucesExitosos.put(contadorCruces, hijoUnoClone); //Se añade el hijo uno a la hash de cruces exitosos
             contadorCruces ++;
@@ -196,6 +195,7 @@ public class AlgoritmoGenetico {
     }
 
     
+    //Funcion que se encarga de asignar un 0 o un 1 a cada pieza del padre
     public void padreBinario(ArrayList<Pieza> padre){
         Random aleatorio = new Random();
         asigAnd++;
