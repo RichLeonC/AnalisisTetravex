@@ -412,7 +412,8 @@ public class AlgoritmoGenetico {
     
     
     // algortimo de cruce kpoint , 
-  
+  //este algoritmo recibe por parametro la cantidad de matches de cada rompecabezas ordenado de mayor a menor 
+   //tambien la poblacion , la cantidad de hijos que  tiene que generar y el limite de piezas por fila 
   public HashMap<Integer, ArrayList> kPoint (HashMap<Integer,Integer> cantidadMatches, HashMap<Integer, ArrayList> poblacion, int hijosP, int limite){
       int con=0;
       int asig=0;
@@ -420,12 +421,12 @@ public class AlgoritmoGenetico {
       
       HashMap<Integer, ArrayList> hijos = new HashMap();// hijos producidos por los cruces y su key
       ArrayList<Pieza> combinacion = new ArrayList();// tetravex hijo 
-      Object[] keys = cantidadMatches.keySet().toArray();// llaves de cantidadMatches
+      Object[] keys = cantidadMatches.keySet().toArray();// llaves de cantidadMatches de mayor a menor
       memoriaKP+=keys.length*32;
       asig++;
       
       
-      Random cantidadCruces = new Random();// cantidad de matches que va a realizar la solucion local 
+      Random cantidadCruces = new Random();// cantidad de cruces que va a realizar la solucion local 
       int numero = cantidadCruces.nextInt(limite+1)+2;
       asig++;
       memoriaKP+=32;
@@ -438,33 +439,33 @@ public class AlgoritmoGenetico {
       int cantiC =0; //cantidad antes de cambiar
       asig++;
       memoriaKP+=32;
-      int contaP1  = 0; // contador de uso de padres 
+      int contaP1  = 0; // contador de uso de padres 1
       asig++;
       memoriaKP+=32;
-      int keyHijo= 0; // keys para los hijos
+      int keyHijo= 0; //  numero de keys para los hijos
       asig++;
       memoriaKP+=32;
-      int contaP2 =1;
+      int contaP2 =1; // contador de uso de padres 2
       asig++;
       memoriaKP+=32;
-      int aux =1;
+      int aux =1; // contador de uso auxiliar para poder reiniciar los padres sun problemas 
       asig++;
       memoriaKP+=32;
       
-      ArrayList<Pieza> padre1 = poblacion.get(keys[contaP1]);
+      ArrayList<Pieza> padre1 = poblacion.get(keys[contaP1]); // se toma el primer padre1
       asig++;
       memoriaKP+= (padre1.size()*176);
-      ArrayList<Pieza> padre2 = poblacion.get(keys[contaP2]);
+      ArrayList<Pieza> padre2 = poblacion.get(keys[contaP2]);// se toma el primer padre2
       memoriaKP+= (padre2.size()*176);
       asig++;
       
-      while (hijosP  > keyHijo){  
+      while (hijosP  > keyHijo){  // cantidad de veces que hará hijos
           con++;
-          for (int m=0 ; m<(limite*limite); m++){
+          for (int m=0 ; m<(limite*limite); m++){ // asegura que se hagan la cantidad piezas correspondientes segun el temaño del tetravex
                asig++;
                con++;
-              if((cambio == true) && (cantiC < (cantidadSeparacion-1)) ){
-                  con++;
+              if((cambio == true) && (cantiC < (cantidadSeparacion-1)) ){// pregunta si la pieza es del padre 1 y si no se ha llegado a la cantidad 
+                  con++;                                                // necesaria de piezas provenientes del padre 1 antes del cambio de padre
                   con++;
                   combinacion.add(padre1.get(m));
                   asig++;
@@ -472,8 +473,8 @@ public class AlgoritmoGenetico {
                    asig++;
                     
               }
-              else if ((cambio == false) && (cantiC < (cantidadSeparacion-1)) ){
-                  con++;
+              else if ((cambio == false) && (cantiC < (cantidadSeparacion-1)) ){// pregunta si la pieza es del padre 2 y si no se ha llegado a la cantidad 
+                  con++;                                                // necesaria de piezas provenientes del padre 2 antes del cambio de padre
                   con++;
                   combinacion.add(padre2.get(m));
                   asig++;
@@ -482,9 +483,8 @@ public class AlgoritmoGenetico {
               }
               
               else{
-                   if((cambio == true)){combinacion.add(padre1.get(m));  con++;}
-                   
-                 
+                   if((cambio == true)){combinacion.add(padre1.get(m));  con++;} // si se llego a la cantidad necesaria para el cambio
+                    //se realiza el ultimo add antes de cambiar de padre
                    else if ((cambio == false) ){combinacion.add(padre2.get(m));  con++;}
      
                    cantiC=0;
@@ -497,13 +497,13 @@ public class AlgoritmoGenetico {
       
             contaP2++;
              asig++;
-            if(contaP2< poblacion.size()){
+            if(contaP2< poblacion.size()){// nueva asignación de padre 2
                 padre2 =poblacion.get(keys[contaP2]);
                 con++;
                 asig++;
             }
             
-            if (contaP2 >= poblacion.size()){
+            if (contaP2 >= poblacion.size()){//se cambian ambos padres
                 con++;
                 contaP1++;
                 asig++;
@@ -518,7 +518,7 @@ public class AlgoritmoGenetico {
             }
  
             
-            hijos.put(keyHijo, combinacion);
+            hijos.put(keyHijo, combinacion);// se coloca el resolutado de la combinacion de ambos padres en la hashmap hijos
             asig++;
             keyHijo++;
             asig++;
